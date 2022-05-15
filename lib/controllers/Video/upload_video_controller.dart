@@ -1,6 +1,5 @@
 import 'dart:io';
 
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -31,7 +30,7 @@ class UploadVideoController extends GetxController {
     return mediaInfo.file;
   }
 
-  Future<File> _getThumbnail(String videoPath) async {
+  static Future<File> getThumbnail(String videoPath) async {
     final thumbnail = await VideoCompress.getFileThumbnail(videoPath);
     return thumbnail;
   }
@@ -40,7 +39,7 @@ class UploadVideoController extends GetxController {
     String id,
     String videoPath,
   ) async {
-    final imageThumbnail = await _getThumbnail(videoPath);
+    final imageThumbnail = await getThumbnail(videoPath);
     UploadTask uploadTask =
         store.ref().child('thumbnails').child(id).putFile(imageThumbnail);
     TaskSnapshot taskSnapshot = await uploadTask;
@@ -75,6 +74,7 @@ class UploadVideoController extends GetxController {
       final userData = (userDocSnapshot.data() as Map<String, dynamic>);
       final videoDocSnapshot = await fire.collection('videos').get();
       int videoLen = videoDocSnapshot.docs.length;
+      final timestamp = DateTime.now();
 
       String videoUrl = await _uploadVideoToFirebaseStorage(
           '${uid}video$videoLen', videoPath);
@@ -84,6 +84,8 @@ class UploadVideoController extends GetxController {
         username: userData['name'],
         uid: uid,
         id: '${uid}video$videoLen',
+        isLiked: false,
+        createdOn: timestamp,
         likes: 0,
         commentCount: 0,
         shareCount: 0,

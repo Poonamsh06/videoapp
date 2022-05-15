@@ -1,18 +1,20 @@
 import 'dart:io';
-import 'package:biscuit1/helpers/firebase_helper.dart';
-import 'package:biscuit1/utilities/constants.dart';
-import 'package:biscuit1/views/add_video_screen.dart';
-import 'package:biscuit1/views/auth/profile_fill_up_screen.dart';
-import 'package:biscuit1/views/profile_screen.dart';
-import 'package:biscuit1/views/videoScreen.dart';
+
+import 'package:biscuit1/views/profile/Profile_page.dart';
+import 'package:biscuit1/views/profile/profile_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-import '../utilities/home_component/search_page.dart';
+import '../helpers/firebase_helper.dart';
+import '../utilities/constants.dart';
 import '../utilities/myDialogBox.dart';
+import 'auth/profile_fill_up_screen.dart';
+import 'home/add_video_screen.dart';
+import 'home/video_screen.dart';
+import 'notifications/mymyHome.dart';
 
 class Home extends StatefulWidget {
   User user;
@@ -30,11 +32,11 @@ class _HomeState extends State<Home> {
   XFile? _videoFile;
 
   final myPages = [
-    VideoScreen(),
-    const Search_page(),
+    const VideoScreen(),
+    const ProfileScreen(),
     const Center(child: Text('add')),
-    const Center(child: Text('messages')),
-    ProfileScreen(),
+    MyMyHome(),
+    ProfilePage(),
   ];
 
   void pickVideo(ImageSource source) async {
@@ -54,15 +56,12 @@ class _HomeState extends State<Home> {
     if (fetchedUserModel == null) return;
 
     if (!fetchedUserModel.isprofilecomplete) {
-      MyDialogBox.showConfirmDialog(
-        context: context,
-        heading: 'OOPS',
-        content:
-            'it seems that you have not completed your profile and credentials, for security reasons please complete it.',
-        leftFun: () => Get.back(),
-        liName: 'No thanks',
-        rightFun: () => Get.to(()=>ProfileFillUpScreen(user: widget.user)),
-        riName: 'complete profile',
+      MyDialogBox.showConfirmDialogBox(
+        message: 'hey, please complete your profile before adding videos',
+        noFun: () => Get.back(),
+        noName: 'No thanks',
+        yesFun: () => Get.to(() => ProfileFillUpScreen(user: widget.user)),
+        yesName: 'Complete',
       );
     } else {
       showVideoOptions();

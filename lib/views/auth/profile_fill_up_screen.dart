@@ -1,12 +1,5 @@
 import 'dart:io';
 
-import 'package:biscuit1/controllers/Auth/email_controller.dart';
-import 'package:biscuit1/controllers/Video/profile_controller.dart';
-import 'package:biscuit1/helpers/firebase_helper.dart';
-import 'package:biscuit1/models/userModel.dart';
-import 'package:biscuit1/utilities/constants.dart';
-import 'package:biscuit1/utilities/myDialogBox.dart';
-import 'package:biscuit1/views/home_Page.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,6 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+
+import '../../controllers/Auth/email_controller.dart';
+import '../../controllers/Video/profile_controller.dart';
+import '../../helpers/firebase_helper.dart';
+import '../../models/userModel.dart';
+import '../../utilities/constants.dart';
+import '../../utilities/myDialogBox.dart';
+import '../home_Page.dart';
 
 class ProfileFillUpScreen extends StatefulWidget {
   User user;

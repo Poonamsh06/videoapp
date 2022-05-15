@@ -1,4 +1,3 @@
-
 import 'package:biscuit1/controllers/Auth/email_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -50,7 +49,7 @@ class GoogleAuthController extends GetxController {
         await EmailController.uploadUserDataToFirestore(user, beforeUserModel);
       }
 
-      Get.to(() => Home(user: user));
+      Get.offAll(() => Home(user: user));
     } catch (e) {
       MyDialogBox.showDefaultDialog(
         'Note',

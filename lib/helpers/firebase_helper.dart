@@ -1,9 +1,9 @@
-
-import 'package:biscuit1/models/userModel.dart';
-import 'package:biscuit1/utilities/constants.dart';
-import 'package:biscuit1/utilities/myDialogBox.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+
+import '../models/userModel.dart';
+import '../utilities/constants.dart';
+import '../utilities/myDialogBox.dart';
 
 class FirebaseHelper {
   static Future<UserModel?> fetchUserDetailsByUid(String uid) async {

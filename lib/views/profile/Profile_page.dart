@@ -20,12 +20,12 @@ class ProfilePage extends StatelessWidget {
         title: const Text("Profile"),
         elevation: 0,
         backgroundColor: const Color(0xff090310),
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Icon(
-              Icons.more_vert,
-              color: Colors.white,
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              icon: const Icon(Icons.more_vert),
+              onPressed: () {},
             ),
           ),
         ],
@@ -194,44 +194,45 @@ class ProfilePage extends StatelessWidget {
           //gallery section
           ,
           Expanded(
-              child: Container(
-            width: double.infinity,
-            margin: const EdgeInsets.only(top: 15),
-            decoration: const BoxDecoration(
-              color: Color(0xffEFEFEF),
-              borderRadius: BorderRadius.vertical(top: Radius.circular(34)),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.only(top: 10, right: 25, left: 25),
-                  child: Text(
-                    'Protfllio',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 33,
+            child: Container(
+              width: double.infinity,
+              margin: const EdgeInsets.only(top: 15),
+              decoration: const BoxDecoration(
+                color: Color(0xffEFEFEF),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(34)),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 10, right: 25, left: 25),
+                    child: Text(
+                      'Protfllio', //////////////////////////////////////////////////
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 33,
+                      ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 50),
-                    child: MasonryGridView.count(
-
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 50),
+                      child: MasonryGridView.count(
                         // gridDelegate: SliverStaggeredGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3, ),
                         // staggeredTileBuilder: (index) => index % 7 == 0?StaggeredTile.count(2,2):StaggeredTile.count(1,1),
                         crossAxisCount: 3,
                         mainAxisSpacing: 8,
                         crossAxisSpacing: 8,
                         itemCount: 10,
-                        itemBuilder: (context, index) => buildVideoCard(index)),
+                        itemBuilder: (context, index) => buildVideoCard(index),
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ))
+          ),
         ],
       ),
     );

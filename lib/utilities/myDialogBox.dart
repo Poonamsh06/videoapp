@@ -1,7 +1,7 @@
-
-import 'package:biscuit1/utilities/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'constants.dart';
 
 class MyDialogBox {
   static void normalDialog() {
@@ -72,6 +72,61 @@ class MyDialogBox {
         ),
       ),
     ));
+  }
+
+  static void showConfirmDialogBox({
+    required String message,
+    required noFun,
+    required String noName,
+    required yesFun,
+    required String yesName,
+  }) {
+    Get.defaultDialog(
+      contentPadding: const EdgeInsets.all(10),
+      middleText: message,
+      middleTextStyle: kSmallSizeBoldTextStyle,
+      title: 'OOPS',
+      titleStyle: kBigSizeBoldTextStyle.copyWith(
+        color: Colors.blue,
+      ),
+      titlePadding: const EdgeInsets.only(top: 10),
+      confirm: ElevatedButton.icon(
+        icon: const Icon(Icons.check),
+        onPressed: yesFun,
+        label: Text(
+          yesName,
+          style: kNormalSizeTextStyle,
+        ),
+        style: ElevatedButton.styleFrom(
+          elevation: 10,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 15,
+            vertical: 7,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+        ),
+      ),
+      cancel: ElevatedButton.icon(
+        icon: const Icon(Icons.close),
+        onPressed: noFun,
+        label: Text(
+          noName,
+          style: kNormalSizeTextStyle,
+        ),
+        style: ElevatedButton.styleFrom(
+          elevation: 10,
+          padding: const EdgeInsets.symmetric(
+            horizontal: 15,
+            vertical: 7,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+        ),
+      ),
+    );
   }
 
   static void showConfirmDialog({

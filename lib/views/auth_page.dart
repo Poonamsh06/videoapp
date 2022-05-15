@@ -1,9 +1,9 @@
-import 'package:biscuit1/views/auth/email_auth_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import '../controllers/Auth/google_auth_controller.dart';
-import '../utilities/reusable.dart';
+import '../utilities/customButton.dart';
+import 'auth/email_auth_screen.dart';
 import 'auth/phone_auth_screen.dart';
 
 class Signin extends StatelessWidget {

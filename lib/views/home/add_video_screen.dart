@@ -1,10 +1,11 @@
 import 'dart:io';
 
-import 'package:biscuit1/Widgets/MyInputField.dart';
-import 'package:biscuit1/controllers/Video/upload_video_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
+
+import '../../controllers/Video/upload_video_controller.dart';
+import '../../utilities/MyInputField.dart';
 
 class AddVideoScreen extends StatefulWidget {
   AddVideoScreen({

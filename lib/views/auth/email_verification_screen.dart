@@ -1,11 +1,12 @@
 import 'dart:async';
 
-import 'package:biscuit1/controllers/Auth/email_controller.dart';
-import 'package:biscuit1/utilities/constants.dart';
-import 'package:biscuit1/utilities/reusable.dart';
-import 'package:biscuit1/utilities/myDialogBox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import '../../controllers/Auth/email_controller.dart';
+import '../../utilities/constants.dart';
+import '../../utilities/customButton.dart';
+import '../../utilities/myDialogBox.dart';
 
 class EmailVerificationScreen extends StatefulWidget {
   EmailVerificationScreen({
