@@ -1,5 +1,6 @@
 import 'package:biscuit1/views/home/utils/widgets/buttons.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../../../../utilities/constants.dart';
 import '../builders/commentLikesCountBuilder.dart';
@@ -27,9 +28,11 @@ class CommentListTile extends StatelessWidget {
             commentDocData['username'],
             style: kSmallSizeBoldTextStyle,
           ),
-          const SizedBox(width: 20),
-          const Text('date'),
           const Spacer(),
+          Text(
+            DateFormat.yM().format(DateTime.parse(commentDocData['createdOn'])),
+            style: kVerySmallSizeTextStyle,
+          ),
           likeTheCommentButton(videoId),
           CommentBuilder(videoId: videoId),
         ],

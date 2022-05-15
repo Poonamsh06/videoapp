@@ -20,6 +20,11 @@ const kSmallSizeTextStyle = TextStyle(
   fontSize: 15,
 );
 
+const kVerySmallSizeTextStyle = TextStyle(
+  fontSize: 12,
+  color: Colors.grey,
+);
+
 const kSmallSizeBoldTextStyle = TextStyle(
   fontSize: 15,
   fontWeight: FontWeight.bold,

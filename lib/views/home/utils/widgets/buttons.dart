@@ -15,6 +15,7 @@ class Like {
     return Padding(
       padding: const EdgeInsets.only(top: 0),
       child: LikeButton(
+        isLiked: like,
         size: 90,
         onTap: onLikeButtonTapped,
         circleColor: const CircleColor(start: Colors.red, end: Colors.red),

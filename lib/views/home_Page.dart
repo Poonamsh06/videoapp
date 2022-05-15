@@ -125,7 +125,7 @@ class _HomeState extends State<Home> {
           navigation_destination(Icons.photo_camera_back,
               Icons.video_camera_back_outlined, "Video"),
           navigation_destination(
-              Icons.message, Icons.notification_add_outlined, "messages"),
+              Icons.message, Icons.forum_outlined, "messages"),
           navigation_destination(Icons.person, Icons.person_outline, "Profile")
         ],
       ),

@@ -13,12 +13,11 @@ class ProfileScreen extends StatelessWidget {
         child: CustomScrollView(
           slivers: [
             SliverAppBar(
-              // backgroundColor: Colors.amber,
+              backgroundColor: Colors.transparent,
               elevation: 10,
-              pinned: true,
+              pinned: false,
               forceElevated: true,
               floating: false,
-              title: const Text('Appbar'),
               expandedHeight: size.width,
               flexibleSpace: FlexibleSpaceBar(
                 stretchModes: const [
