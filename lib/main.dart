@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 import 'controllers/Auth/google_auth_controller.dart';
 import 'views/auth_page.dart';
-import 'views/home_Page.dart';
+import 'views/home.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

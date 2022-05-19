@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
-class Search_page extends StatefulWidget {
-  const Search_page({Key? key}) : super(key: key);
+class SearchScreen extends StatefulWidget {
+  const SearchScreen({Key? key}) : super(key: key);
 
   @override
-  State<Search_page> createState() => _Search_pageState();
+  State<SearchScreen> createState() => _SearchScreenState();
 }
 
-class _Search_pageState extends State<Search_page> {
+class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(

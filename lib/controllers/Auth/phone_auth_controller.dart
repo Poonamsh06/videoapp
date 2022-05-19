@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import '../../models/userModel.dart';
 import '../../utilities/constants.dart';
 import '../../utilities/myDialogBox.dart';
-import '../../views/home_Page.dart';
+import '../../views/home.dart';
 
 class PhoneController {
   String verificationIdReceived = '';
@@ -63,6 +63,8 @@ class PhoneController {
           email: '',
           phone: userCredential.user!.phoneNumber,
           aboutme: '',
+          followers: 0,
+          following: 0,
           success: true,
           isprofilecomplete: false,
         );

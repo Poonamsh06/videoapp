@@ -1,11 +1,13 @@
 import 'package:biscuit1/utilities/constants.dart';
+import 'package:biscuit1/views/profile/profile_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:like_button/like_button.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../../comment_screen.dart';
+import '../../home.dart';
+import '../comment_screen.dart';
 
 class Like {
   late String videoId;
@@ -47,13 +49,13 @@ class Like {
     final videoData = videoDocSnap.data() as Map<String, dynamic>;
 
     if (likedSnap.exists) {
-      await fire.runTransaction((Transaction myTransaction) async {
-        myTransaction.delete(fire
-            .collection('videos')
-            .doc(videoId)
-            .collection('like')
-            .doc(userId));
-      });
+      await fire
+          .collection('videos')
+          .doc(videoId)
+          .collection('like')
+          .doc(userId)
+          .delete();
+
       videoData['isLiked'] = false;
       fire.collection('videos').doc(videoId).set(videoData);
       return false;
@@ -71,41 +73,52 @@ class Like {
   }
 }
 
-buildProfileImage(String profilePhotoUrl) {
+buildProfileImage(Map<String, dynamic> videoData) {
+  final profilePhotoUrl = videoData['profilePhoto'];
+  final userId = videoData['id'].toString().substring(0, 28);
   return SizedBox(
-    width: 60,
-    height: 60,
+    width: 55,
+    height: 70,
     child: Stack(
       children: [
         Positioned(
-          left: 5,
-          child: Container(
-            padding: const EdgeInsets.all(1),
-            width: 50,
-            height: 50,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(25),
-              border: Border.all(color: Colors.white, width: 1.6),
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(25),
-              child: Image.network(
-                profilePhotoUrl,
-                fit: BoxFit.cover,
+          child: SizedBox(
+            height: 55,
+            child: ElevatedButton(
+              onPressed: () => userId == auth.currentUser!.uid
+                  ? Get.offAll(() => Home(user: auth.currentUser!))
+                  : Get.to(() => ProfileScreen(uid: userId)),
+              style: ElevatedButton.styleFrom(
+                onPrimary: const Color.fromARGB(255, 0, 140, 255),
+                primary: Colors.white,
+                padding:
+                    const EdgeInsets.symmetric(vertical: 3, horizontal: 2.4),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30),
+                ),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: Image.network(
+                  profilePhotoUrl,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
         ),
-        const Positioned(
-          bottom: 4,
-          left: 20,
-          child: CircleAvatar(
-            radius: 10,
-            backgroundColor: Colors.white,
-            child: Icon(
-              Icons.add,
-              size: 21,
+        Positioned(
+          bottom: 5,
+          left: 15,
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: const Icon(
+              Icons.add_circle,
+              size: 25,
+              color: Colors.blue,
             ),
           ),
         ),
@@ -198,3 +211,11 @@ likeTheCommentButton(String videoId) {
     },
   );
 }
+
+
+// await fire.runTransaction((Transaction myTransaction) async {
+//         myTransaction.delete(fire
+//             .collection('videos')
+//             .doc(videoId)
+//             .collection('like')
+//             .doc(userId));

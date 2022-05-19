@@ -1,7 +1,8 @@
 import 'dart:io';
 
-import 'package:biscuit1/views/profile/Profile_page.dart';
-import 'package:biscuit1/views/profile/profile_screen.dart';
+import 'package:biscuit1/models/userModel.dart';
+import 'package:biscuit1/views/notifications/notifiction_screen.dart';
+import 'package:biscuit1/views/search/search_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -14,7 +15,7 @@ import '../utilities/myDialogBox.dart';
 import 'auth/profile_fill_up_screen.dart';
 import 'home/add_video_screen.dart';
 import 'home/video_screen.dart';
-import 'notifications/mymyHome.dart';
+import 'profile/profile_screen.dart';
 
 class Home extends StatefulWidget {
   User user;
@@ -28,22 +29,23 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _currIndex = 0;
+  int _currIndex = 4;
   XFile? _videoFile;
 
   final myPages = [
     const VideoScreen(),
-    const ProfileScreen(),
+    const SearchScreen(),
     const Center(child: Text('add')),
-    MyMyHome(),
-    ProfilePage(),
+    const NotificationScreen(),
+    ProfileScreen(uid: ''),
   ];
+
+  UserModel? um;
 
   void pickVideo(ImageSource source) async {
     _videoFile = await ImagePicker().pickVideo(source: source);
-    if (_videoFile == null) {
-      return;
-    }
+    if (_videoFile == null) return;
+
     Get.to(AddVideoScreen(
       videoFile: File(_videoFile!.path),
       videoPath: _videoFile!.path,
@@ -52,7 +54,7 @@ class _HomeState extends State<Home> {
 
   void completeProfile() async {
     final fetchedUserModel =
-        await FirebaseHelper.fetchUserDetailsByUid(widget.user.uid);
+        await FirebaseHelper.fetchUserDetailsByUid(uid: widget.user.uid);
     if (fetchedUserModel == null) return;
 
     if (!fetchedUserModel.isprofilecomplete) {
@@ -118,8 +120,7 @@ class _HomeState extends State<Home> {
           }
         },
         destinations: [
-          navigation_destination(
-              Icons.home_filled, Icons.home_outlined, "Home"),
+          navigation_destination(Icons.home, Icons.home_outlined, "Home"),
           navigation_destination(
               FontAwesomeIcons.searchengin, Icons.search, "Search"),
           navigation_destination(Icons.photo_camera_back,

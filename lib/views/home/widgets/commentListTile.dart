@@ -1,9 +1,9 @@
-import 'package:biscuit1/views/home/utils/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../../../utilities/constants.dart';
-import '../builders/commentLikesCountBuilder.dart';
+import 'buttons.dart';
+import 'commentLikesCountBuilder.dart';
 
 class CommentListTile extends StatelessWidget {
   const CommentListTile({

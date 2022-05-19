@@ -30,6 +30,12 @@ const kSmallSizeBoldTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
+const kWSmallSizeBoldTextStyle = TextStyle(
+  fontSize: 15,
+  fontWeight: FontWeight.bold,
+  color: Colors.white,
+);
+
 const kBigSizeTextStyle = TextStyle(
   fontSize: 25,
 );
@@ -53,6 +59,11 @@ const kWNormalSizeBoldTextStyle = TextStyle(
 );
 
 const kWSmallSizeTextStyle = TextStyle(
+  fontSize: 15,
+  color: Colors.white,
+);
+
+const kWSmallBoldSizeTextStyle = TextStyle(
   fontSize: 15,
   color: Colors.white,
   fontWeight: FontWeight.bold,

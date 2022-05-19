@@ -15,7 +15,7 @@ import '../../helpers/firebase_helper.dart';
 import '../../models/userModel.dart';
 import '../../utilities/constants.dart';
 import '../../utilities/myDialogBox.dart';
-import '../home_Page.dart';
+import '../home.dart';
 
 class ProfileFillUpScreen extends StatefulWidget {
   User user;
@@ -69,7 +69,7 @@ class _ProfileFillUpScreenState extends State<ProfileFillUpScreen> {
 
   void _setUserData() async {
     final userModel =
-        await FirebaseHelper.fetchUserDetailsByUid(widget.user.uid);
+        await FirebaseHelper.fetchUserDetailsByUid(uid: widget.user.uid);
 
     if (userModel == null) return;
 
@@ -129,7 +129,7 @@ class _ProfileFillUpScreenState extends State<ProfileFillUpScreen> {
       String imageDownloadUrl = await taskSnapshot.ref.getDownloadURL();
 
       final fetchedBeforeUserModel =
-          await FirebaseHelper.fetchUserDetailsByUid(widget.user.uid);
+          await FirebaseHelper.fetchUserDetailsByUid(uid: widget.user.uid);
 
       if (fetchedBeforeUserModel == null) return;
 
@@ -140,6 +140,8 @@ class _ProfileFillUpScreenState extends State<ProfileFillUpScreen> {
         email: _emailController.text,
         phone: _phoneController.text,
         aboutme: _aboutController.text,
+        followers: 0,
+        following: 0,
         success: true,
         isprofilecomplete: true,
       );
@@ -154,6 +156,7 @@ class _ProfileFillUpScreenState extends State<ProfileFillUpScreen> {
         'Hurray !',
         'your profile updated successfully.',
       );
+
       Get.offAll(Home(user: widget.user));
     } on FirebaseException catch (e) {
       MyDialogBox.showDefaultDialog(e.code, e.message.toString());

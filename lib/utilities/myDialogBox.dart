@@ -41,6 +41,39 @@ class MyDialogBox {
     );
   }
 
+  static Widget loadingScreen() {
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Center(
+        child: Container(
+          padding: const EdgeInsets.only(top: 18),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30),
+            color: Colors.white,
+          ),
+          width: 200,
+          height: 105,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                const CircularProgressIndicator(),
+                const SizedBox(height: 12),
+                Text(
+                  'loading',
+                  style: kNormalSizeTextStyle.copyWith(
+                    color: Colors.blue,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   static void loading({String message = 'loading...'}) {
     Get.dialog(Scaffold(
       backgroundColor: Colors.transparent,
@@ -125,45 +158,6 @@ class MyDialogBox {
             borderRadius: BorderRadius.circular(15),
           ),
         ),
-      ),
-    );
-  }
-
-  static void showConfirmDialog({
-    required BuildContext context,
-    required String heading,
-    required leftFun,
-    required String liName,
-    required rightFun,
-    required String riName,
-    String? content,
-  }) {
-    showDialog(
-      barrierColor: Theme.of(context).colorScheme.secondary.withAlpha(100),
-      context: context,
-      builder: (context) => AlertDialog(
-        title: Text(
-          heading,
-          style: TextStyle(
-            color: Theme.of(context).colorScheme.secondary,
-          ),
-        ),
-        content: content != null ? Text(content) : null,
-        actions: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              TextButton(
-                onPressed: leftFun,
-                child: Text(liName),
-              ),
-              TextButton(
-                onPressed: rightFun,
-                child: Text(riName),
-              ),
-            ],
-          )
-        ],
       ),
     );
   }

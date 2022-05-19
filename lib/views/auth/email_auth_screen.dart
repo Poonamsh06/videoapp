@@ -10,7 +10,7 @@ import '../../models/userModel.dart';
 import '../../utilities/constants.dart';
 import '../../utilities/myDialogBox.dart';
 import '../../utilities/customButton.dart';
-import '../home_Page.dart';
+import '../home.dart';
 
 class EmailAuthScreen extends StatefulWidget {
   @override
@@ -310,6 +310,8 @@ class _EmailAuthScreenState extends State<EmailAuthScreen> {
             email: auth.currentUser!.email,
             phone: '',
             aboutme: '',
+            followers: 0,
+            following: 0,
             success: true,
             isprofilecomplete: false,
           );

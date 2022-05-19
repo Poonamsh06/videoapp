@@ -1,10 +1,10 @@
+import 'package:biscuit1/views/home/widgets/buttons.dart';
+import 'package:biscuit1/views/home/widgets/circleVideoAnimation.dart';
+import 'package:biscuit1/views/home/widgets/videoPlayerItem.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../utilities/constants.dart';
-import 'utils/widgets/circleVideoAnimation.dart';
-import 'utils/widgets/videoPlayerItem.dart';
-import 'utils/widgets/buttons.dart';
 
 class VideoScreen extends StatelessWidget {
   const VideoScreen({Key? key}) : super(key: key);
@@ -87,7 +87,7 @@ class VideoScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   //
-                                  buildProfileImage(videoData['profilePhoto']),
+                                  buildProfileImage(videoData),
                                   //
                                   Like().customLikeButton(
                                     videoData['id'],

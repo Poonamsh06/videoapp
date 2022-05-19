@@ -1,4 +1,4 @@
-import 'package:biscuit1/views/home/utils/widgets/commentListTile.dart';
+import 'package:biscuit1/views/home/widgets/commentListTile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -25,7 +25,7 @@ class CommentScreen extends StatelessWidget {
       return;
     }
     final userModel =
-        await FirebaseHelper.fetchUserDetailsByUid(auth.currentUser!.uid);
+        await FirebaseHelper.fetchUserDetailsByUid(uid: auth.currentUser!.uid);
     if (userModel == null) return;
 
     final videoDocSnap = await fire.collection('videos').doc(videoId).get();

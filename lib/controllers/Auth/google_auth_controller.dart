@@ -8,7 +8,7 @@ import '../../helpers/firebase_helper.dart';
 import '../../models/userModel.dart';
 import '../../utilities/constants.dart';
 import '../../utilities/myDialogBox.dart';
-import '../../views/home_Page.dart';
+import '../../views/home.dart';
 
 class GoogleAuthController extends GetxController {
   final GoogleSignIn googleSignIn = GoogleSignIn();
@@ -40,6 +40,8 @@ class GoogleAuthController extends GetxController {
           email: user.email,
           phone: '',
           aboutme: '',
+          followers: 0,
+          following: 0,
           success: true,
           isprofilecomplete: false,
         );
@@ -60,7 +62,7 @@ class GoogleAuthController extends GetxController {
 
   static Future<UserModel?> checkWhetherUserIsPresent(User user) async {
     final fetchedUserModel =
-        await FirebaseHelper.fetchUserDetailsByUid(user.uid);
+        await FirebaseHelper.fetchUserDetailsByUid(uid: user.uid);
     if (fetchedUserModel == null) return null;
 
     final fetId = user.uid;
@@ -79,6 +81,8 @@ class GoogleAuthController extends GetxController {
       email: fetEmail,
       phone: fetPhone,
       aboutme: fetAboutMe,
+      followers: 0,
+      following: 0,
       success: fetSuccess,
       isprofilecomplete: fetIsProfileComplete,
     );
