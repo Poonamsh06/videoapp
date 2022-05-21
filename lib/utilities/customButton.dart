@@ -47,9 +47,10 @@ class CustomButton extends StatelessWidget {
               child: Text(
                 title,
                 style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
             ),
           ],
@@ -58,6 +59,3 @@ class CustomButton extends StatelessWidget {
     );
   }
 }
-
-
- 

@@ -1,16 +1,16 @@
 import 'dart:async';
-import 'package:biscuit1/controllers/Auth/email_controller.dart';
-import 'package:biscuit1/models/userModel.dart';
-import 'package:biscuit1/views/home_Page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import '../../controllers/Auth/email_controller.dart';
+import '../../models/userModel.dart';
 import '../../utilities/constants.dart';
 import '../../utilities/myDialogBox.dart';
-import '../../utilities/reusable.dart';
+import '../../utilities/customButton.dart';
+import '../home.dart';
 
 class EmailAuthScreen extends StatefulWidget {
   @override
@@ -284,12 +284,11 @@ class _EmailAuthScreenState extends State<EmailAuthScreen> {
         );
         print("hello");
         setState(() => success = true);
-         FirebaseFirestore _firestore = FirebaseFirestore.instance;
+        FirebaseFirestore _firestore = FirebaseFirestore.instance;
         await _firestore.collection('users').doc(_auth.currentUser!.uid).set({
           "Email": _email,
           "Status": "unavalible",
         });
-
       } on FirebaseAuthException catch (e) {
         setState(() => _isLoading = false);
         MyDialogBox.showDefaultDialog(
@@ -311,6 +310,8 @@ class _EmailAuthScreenState extends State<EmailAuthScreen> {
             email: auth.currentUser!.email,
             phone: '',
             aboutme: '',
+            followers: 0,
+            following: 0,
             success: true,
             isprofilecomplete: false,
           );

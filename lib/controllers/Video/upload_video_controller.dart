@@ -1,6 +1,6 @@
 import 'dart:io';
 
-
+import 'package:uuid/uuid.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -14,7 +14,8 @@ import '../../utilities/myDialogBox.dart';
 class UploadVideoController extends GetxController {
   final _auth = FirebaseAuth.instance;
 
-  _compressVideo(String videoPath) async {
+  compressVideo(String videoPath) async {
+    VideoCompress.setLogLevel(0);
     final MediaInfo? mediaInfo = await VideoCompress.compressVideo(
       videoPath,
       quality: VideoQuality.MediumQuality,
@@ -28,21 +29,20 @@ class UploadVideoController extends GetxController {
       return;
     }
 
-    return mediaInfo.file;
+    return mediaInfo;
   }
 
-  Future<File> _getThumbnail(String videoPath) async {
+  static Future<File> getThumbnail(String videoPath) async {
     final thumbnail = await VideoCompress.getFileThumbnail(videoPath);
     return thumbnail;
   }
 
   Future<String> _uploadImageToFirebaseStorage(
     String id,
-    String videoPath,
+    File thumb,
   ) async {
-    final imageThumbnail = await _getThumbnail(videoPath);
     UploadTask uploadTask =
-        store.ref().child('thumbnails').child(id).putFile(imageThumbnail);
+        store.ref().child('thumbnails').child(id).putFile(thumb);
     TaskSnapshot taskSnapshot = await uploadTask;
     final String imageThumbnailUrl = await taskSnapshot.ref.getDownloadURL();
     return imageThumbnailUrl;
@@ -50,12 +50,10 @@ class UploadVideoController extends GetxController {
 
   Future<String> _uploadVideoToFirebaseStorage(
     String id,
-    String videoPath,
+    File compVid,
   ) async {
-    final compressedFile = await _compressVideo(videoPath);
-
     UploadTask uploadTask =
-        store.ref().child('videos').child(id).putFile(compressedFile);
+        store.ref().child('videos').child(id).putFile(compVid);
     TaskSnapshot taskSnapshot = await uploadTask;
 
     final String downloadUrl = await taskSnapshot.ref.getDownloadURL();
@@ -64,26 +62,33 @@ class UploadVideoController extends GetxController {
   }
 
   void uploadVideo(
-      String videoTitle, String description, String videoPath) async {
+    String videoTitle,
+    String description,
+    File compressedVid,
+    File thumbnail,
+  ) async {
     try {
       MyDialogBox.loading(message: 'uploading...');
       String uid = _auth.currentUser!.uid;
 
       DocumentSnapshot userDocSnapshot =
           await fire.collection('users').doc(uid).get();
-
       final userData = (userDocSnapshot.data() as Map<String, dynamic>);
-      final videoDocSnapshot = await fire.collection('videos').get();
-      int videoLen = videoDocSnapshot.docs.length;
+
+      final timestamp = DateTime.now();
+      final videoId = const Uuid().v1();
 
       String videoUrl = await _uploadVideoToFirebaseStorage(
-          '${uid}video$videoLen', videoPath);
-      String thumbnailUrl = await _uploadImageToFirebaseStorage(
-          '${uid}video$videoLen', videoPath);
+          '${uid}video$videoId', compressedVid);
+      String thumbnailUrl =
+          await _uploadImageToFirebaseStorage('${uid}video$videoId', thumbnail);
+
       VideoModel newVideo = VideoModel(
         username: userData['name'],
         uid: uid,
-        id: '${uid}video$videoLen',
+        id: '${uid}video$videoId',
+        isLiked: false,
+        createdOn: timestamp,
         likes: 0,
         commentCount: 0,
         shareCount: 0,
@@ -93,9 +98,10 @@ class UploadVideoController extends GetxController {
         thumbnailUrl: thumbnailUrl,
         profilePhoto: userData['profilepic'],
       );
+
       await fire
           .collection('videos')
-          .doc('${uid}video$videoLen')
+          .doc('${uid}video$videoId')
           .set(newVideo.toMap());
 
       Get.back();

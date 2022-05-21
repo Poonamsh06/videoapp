@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 
 import 'controllers/Auth/google_auth_controller.dart';
 import 'views/auth_page.dart';
-import 'views/home_Page.dart';
+import 'views/home.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,14 +38,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // home:  email == 'hello' ? Signin() : Home()
-      // home: EmailVerificationScreen(),
       home: screen,
-      // home: ProfileFillUpScreen(user: auth.currentUser!),
       getPages: [
         GetPage(name: '/', page: () => Signin()),
-        // GetPage(name: '/homePage', page: () =>  Home(user: ,)),
-        // Dynamic route
       ],
     );
   }

@@ -1,13 +1,12 @@
-
+import 'package:biscuit1/controllers/Auth/email_controller.dart';
+import 'package:biscuit1/controllers/Auth/google_auth_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 import '../../models/userModel.dart';
 import '../../utilities/constants.dart';
 import '../../utilities/myDialogBox.dart';
-import '../../views/home_Page.dart';
-import 'email_controller.dart';
-import 'google_auth_controller.dart';
+import '../../views/home.dart';
 
 class PhoneController {
   String verificationIdReceived = '';
@@ -64,6 +63,8 @@ class PhoneController {
           email: '',
           phone: userCredential.user!.phoneNumber,
           aboutme: '',
+          followers: 0,
+          following: 0,
           success: true,
           isprofilecomplete: false,
         );
@@ -78,7 +79,7 @@ class PhoneController {
           beforeUserModel,
         );
       }
-      Get.to(Home(user: userCredential.user!));
+      Get.offAll(Home(user: userCredential.user!));
     } on FirebaseAuthException catch (e) {
       Get.back();
       MyDialogBox.showDefaultDialog(

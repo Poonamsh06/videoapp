@@ -1,12 +1,5 @@
 import 'dart:io';
 
-import 'package:biscuit1/controllers/Auth/email_controller.dart';
-import 'package:biscuit1/controllers/Video/profile_controller.dart';
-import 'package:biscuit1/helpers/firebase_helper.dart';
-import 'package:biscuit1/models/userModel.dart';
-import 'package:biscuit1/utilities/constants.dart';
-import 'package:biscuit1/utilities/myDialogBox.dart';
-import 'package:biscuit1/views/home_Page.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,6 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+
+import '../../controllers/Auth/email_controller.dart';
+import '../../controllers/Video/profile_controller.dart';
+import '../../helpers/firebase_helper.dart';
+import '../../models/userModel.dart';
+import '../../utilities/constants.dart';
+import '../../utilities/myDialogBox.dart';
+import '../home.dart';
 
 class ProfileFillUpScreen extends StatefulWidget {
   User user;
@@ -68,7 +69,7 @@ class _ProfileFillUpScreenState extends State<ProfileFillUpScreen> {
 
   void _setUserData() async {
     final userModel =
-        await FirebaseHelper.fetchUserDetailsByUid(widget.user.uid);
+        await FirebaseHelper.fetchUserDetailsByUid(uid: widget.user.uid);
 
     if (userModel == null) return;
 
@@ -128,7 +129,7 @@ class _ProfileFillUpScreenState extends State<ProfileFillUpScreen> {
       String imageDownloadUrl = await taskSnapshot.ref.getDownloadURL();
 
       final fetchedBeforeUserModel =
-          await FirebaseHelper.fetchUserDetailsByUid(widget.user.uid);
+          await FirebaseHelper.fetchUserDetailsByUid(uid: widget.user.uid);
 
       if (fetchedBeforeUserModel == null) return;
 
@@ -139,6 +140,8 @@ class _ProfileFillUpScreenState extends State<ProfileFillUpScreen> {
         email: _emailController.text,
         phone: _phoneController.text,
         aboutme: _aboutController.text,
+        followers: 0,
+        following: 0,
         success: true,
         isprofilecomplete: true,
       );
@@ -153,6 +156,7 @@ class _ProfileFillUpScreenState extends State<ProfileFillUpScreen> {
         'Hurray !',
         'your profile updated successfully.',
       );
+
       Get.offAll(Home(user: widget.user));
     } on FirebaseException catch (e) {
       MyDialogBox.showDefaultDialog(e.code, e.message.toString());

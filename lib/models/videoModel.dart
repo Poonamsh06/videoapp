@@ -4,6 +4,8 @@ class VideoModel {
   String username;
   String uid;
   String id;
+  bool isLiked;
+  DateTime createdOn;
   int likes;
   int commentCount;
   int shareCount;
@@ -17,6 +19,8 @@ class VideoModel {
     required this.username,
     required this.uid,
     required this.id,
+    required this.isLiked,
+    required this.createdOn,
     required this.likes,
     required this.commentCount,
     required this.shareCount,
@@ -32,6 +36,8 @@ class VideoModel {
       'username': username,
       'uid': uid,
       'id': id,
+      'isLiked': isLiked,
+      'createdOn': createdOn,
       'likes': likes,
       'commentCount': commentCount,
       'shareCount': shareCount,
@@ -49,6 +55,8 @@ class VideoModel {
       username: snapData['username'],
       uid: snapData['uid'],
       id: snapData['id'],
+      isLiked: snapData['isLiked'],
+      createdOn: snapData['createdOn'],
       likes: snapData['likes'],
       commentCount: snapData['commentCount'],
       shareCount: snapData['shareCount'],

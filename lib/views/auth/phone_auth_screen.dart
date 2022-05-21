@@ -1,9 +1,10 @@
-import 'package:biscuit1/utilities/myDialogBox.dart';
-import 'package:biscuit1/controllers/Auth/phone_auth_controller.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+
+import '../../controllers/Auth/phone_auth_controller.dart';
+import '../../utilities/myDialogBox.dart';
 
 class PhoneAuthScreen extends StatefulWidget {
   PhoneAuthScreen({
