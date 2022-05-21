@@ -1,11 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:uuid/uuid.dart';
 
+import '../models/notifyModel.dart';
 import '../models/userModel.dart';
 import '../utilities/constants.dart';
 import '../utilities/myDialogBox.dart';
 
 class FirebaseHelper {
+  //
   static Future<UserModel?> fetchUserDetailsByUid({
     required String uid,
     bool? no,
@@ -48,5 +51,33 @@ class FirebaseHelper {
     } else {
       return false;
     }
+  }
+
+  static updateDataToNotification({
+    required String othUid,
+    required String message,
+    required String comDes,
+  }) async {
+    final uuid = const Uuid().v1();
+    // ================= notification ==========
+    final timestamp = DateTime.now();
+    final otherUserData = await fetchUserDetailsByUid(uid: othUid, no: true);
+    if (otherUserData == null) return;
+
+    final otherNoti = NotifyModel(
+      username: otherUserData.name!,
+      notId: otherUserData.uid!,
+      createdOn: timestamp.toIso8601String(),
+      commentDescription: comDes,
+      message: message,
+      profilePic: otherUserData.profilepic!,
+    );
+
+    fire
+        .collection('users')
+        .doc(othUid)
+        .collection('notifications')
+        .doc('${auth.currentUser!.uid}$uuid')
+        .set(otherNoti.toMap());
   }
 }

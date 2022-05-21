@@ -18,6 +18,7 @@ class CommentListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      onTap: () {},
       leading: CircleAvatar(
         backgroundColor: Theme.of(context).primaryColor.withAlpha(100),
         backgroundImage: NetworkImage(commentDocData['profilePic']),
@@ -34,7 +35,7 @@ class CommentListTile extends StatelessWidget {
             style: kVerySmallSizeTextStyle,
           ),
           likeTheCommentButton(videoId),
-          CommentBuilder(videoId: videoId),
+          CommentLikeCountBuilder(videoId: videoId),
         ],
       ),
       subtitle: Text(

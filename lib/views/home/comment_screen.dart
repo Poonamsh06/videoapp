@@ -50,6 +50,13 @@ class CommentScreen extends StatelessWidget {
         .collection('comments')
         .doc(commentId)
         .set(newComment.toMap());
+
+    //
+    FirebaseHelper.updateDataToNotification(
+      othUid: videoId.substring(0, 27),
+      message: 'comment',
+      comDes: _commentController.text,
+    );
     _commentController.text = '';
   }
 
@@ -68,6 +75,7 @@ class CommentScreen extends StatelessWidget {
                     .collection('videos')
                     .doc(videoId)
                     .collection('comments')
+                    .orderBy('createdOn', descending: true)
                     .snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {

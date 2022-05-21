@@ -1,3 +1,4 @@
+import 'package:biscuit1/helpers/firebase_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -122,7 +123,7 @@ class _FollowButtonState extends State<FollowButton> {
   }
 
   follow() {
-    fire
+    fire //notify follower that someone is following him
         .collection('users')
         .doc(widget.othUid)
         .collection('followers')
@@ -130,12 +131,20 @@ class _FollowButtonState extends State<FollowButton> {
         .set({'me': ''});
     setState(() => _isFollowing = true);
 
-    fire
+    fire //notify me that i am following someone
         .collection('users')
         .doc(auth.currentUser!.uid)
         .collection('following')
         .doc(widget.othUid)
         .set({'me': ''});
+
+    // send notification that someone is following
+    //
+    FirebaseHelper.updateDataToNotification(
+      othUid: widget.othUid,
+      message: 'follow',
+      comDes: '',
+    );
   }
 
   unfollow() {
@@ -163,23 +172,24 @@ class _FollowButtonState extends State<FollowButton> {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: BorderRadius.circular(33),
-      onTap: () async {
-        _isFollowing ? unfollow() : follow();
-      },
-      child: Container(
-        margin: const EdgeInsets.all(2),
-        padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(33),
-          gradient: const LinearGradient(
-            colors: [Color(0xff4059f1), Color(0xff6d0eb5)],
-          ),
+    return Ink(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(33),
+        gradient: const LinearGradient(
+          colors: [Color(0xff4059f1), Color(0xff6d0eb5)],
         ),
-        child: Text(
-          _isFollowing ? 'Following' : 'Follow',
-          style: kWSmallSizeBoldTextStyle,
+      ),
+      child: InkWell(
+        borderRadius: BorderRadius.circular(33),
+        onTap: () async {
+          _isFollowing ? unfollow() : follow();
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 8),
+          child: Text(
+            _isFollowing ? 'Following' : 'Follow',
+            style: kWSmallSizeBoldTextStyle,
+          ),
         ),
       ),
     );

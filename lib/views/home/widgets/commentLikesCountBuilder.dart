@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../../../../utilities/constants.dart';
 
-class CommentBuilder extends StatelessWidget {
-  const CommentBuilder({
+class CommentLikeCountBuilder extends StatelessWidget {
+  const CommentLikeCountBuilder({
     Key? key,
     required this.videoId,
   }) : super(key: key);

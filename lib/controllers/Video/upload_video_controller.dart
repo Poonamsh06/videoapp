@@ -1,6 +1,6 @@
-import 'dart:developer';
 import 'dart:io';
 
+import 'package:uuid/uuid.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -75,20 +75,18 @@ class UploadVideoController extends GetxController {
           await fire.collection('users').doc(uid).get();
       final userData = (userDocSnapshot.data() as Map<String, dynamic>);
 
-      final videoDocSnapshot = await fire.collection('videos').get();
-      int videoLen = videoDocSnapshot.docs.length;
-      log('==========================================$videoLen');
       final timestamp = DateTime.now();
+      final videoId = const Uuid().v1();
 
       String videoUrl = await _uploadVideoToFirebaseStorage(
-          '${uid}video$videoLen', compressedVid);
-      String thumbnailUrl = await _uploadImageToFirebaseStorage(
-          '${uid}video$videoLen', thumbnail);
+          '${uid}video$videoId', compressedVid);
+      String thumbnailUrl =
+          await _uploadImageToFirebaseStorage('${uid}video$videoId', thumbnail);
 
       VideoModel newVideo = VideoModel(
         username: userData['name'],
         uid: uid,
-        id: '${uid}video$videoLen',
+        id: '${uid}video$videoId',
         isLiked: false,
         createdOn: timestamp,
         likes: 0,
@@ -103,7 +101,7 @@ class UploadVideoController extends GetxController {
 
       await fire
           .collection('videos')
-          .doc('${uid}video$videoLen')
+          .doc('${uid}video$videoId')
           .set(newVideo.toMap());
 
       Get.back();

@@ -1,4 +1,5 @@
 import 'package:biscuit1/utilities/constants.dart';
+import 'package:biscuit1/views/home/widgets/my_Like_Btn.dart';
 import 'package:biscuit1/views/profile/profile_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -55,9 +56,9 @@ class Like {
           .collection('like')
           .doc(userId)
           .delete();
-
       videoData['isLiked'] = false;
       fire.collection('videos').doc(videoId).set(videoData);
+
       return false;
     } else {
       fire
@@ -68,6 +69,9 @@ class Like {
           .set({'user': auth.currentUser!.uid});
       videoData['isLiked'] = true;
       fire.collection('videos').doc(videoId).set(videoData);
+
+      //
+      MyLikeState.updateUsersNotification(videoId.substring(0, 27));
       return true;
     }
   }
@@ -142,26 +146,24 @@ Widget commentButton(String id) {
   );
 }
 
-Padding shareButton(String url) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 10),
-    child: IconButton(
-      onPressed: () async {
-        final uid = auth.currentUser!.uid;
-        final urlpreview = url;
-        if (uid.isEmpty) {
-          //playstore link
-          // log("play store link");
-        } else {
-          await Share.share(
-              "download and enjoy Biscuit app shorts ❤️  \n\n$urlpreview");
-        }
-      },
-      icon: const Icon(
-        Icons.share_rounded,
-        size: 35,
-        color: Colors.grey,
-      ),
+Widget shareButton(String url) {
+  return IconButton(
+    focusColor: const Color.fromARGB(255, 0, 140, 255),
+    onPressed: () async {
+      final uid = auth.currentUser!.uid;
+      final urlpreview = url;
+      if (uid.isEmpty) {
+        //playstore link
+        // log("play store link");
+      } else {
+        await Share.share(
+            "download and enjoy Biscuit app shorts ❤️  \n\n$urlpreview");
+      }
+    },
+    icon: const Icon(
+      Icons.share_rounded,
+      size: 35,
+      color: Colors.grey,
     ),
   );
 }

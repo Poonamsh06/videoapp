@@ -38,14 +38,9 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // home:  email == 'hello' ? Signin() : Home()
-      // home: EmailVerificationScreen(),
       home: screen,
-      // home: ProfileFillUpScreen(user: auth.currentUser!),
       getPages: [
         GetPage(name: '/', page: () => Signin()),
-        // GetPage(name: '/homePage', page: () =>  Home(user: ,)),
-        // Dynamic route
       ],
     );
   }

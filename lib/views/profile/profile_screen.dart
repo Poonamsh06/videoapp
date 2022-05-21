@@ -2,6 +2,7 @@ import 'package:biscuit1/models/userModel.dart';
 import 'package:biscuit1/utilities/myDialogBox.dart';
 import 'package:biscuit1/views/home.dart';
 import 'package:biscuit1/views/profile/utils/profileComponents.dart';
+import 'package:biscuit1/views/profile/utils/videoPopUpScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,7 +44,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
       Get.offAll(() => Home(user: auth.currentUser!));
     } else {
       final usermodel = await FirebaseHelper.fetchUserDetailsByUid(
-          uid: widget.uid == '' ? userID : widget.uid, no: false);
+        uid: widget.uid == '' ? userID : widget.uid,
+        no: true,
+      );
       if (usermodel == null) return;
       setState(() {
         um = usermodel;
@@ -186,7 +189,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
                               return const Center(
-                                  child: CircularProgressIndicator());
+                                child: CircularProgressIndicator(),
+                              );
                             } else if (snapshot.hasData) {
                               final myVidSnap = snapshot.data as QuerySnapshot;
 
@@ -252,12 +256,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     myVidSnap.docs[index].data()
                                                         as Map<String, dynamic>;
 
-                                                return SizedBox(
-                                                  width: 100,
-                                                  height: 100,
-                                                  child: Image.network(
-                                                    myVidData['thumbnailUrl'],
-                                                    fit: BoxFit.cover,
+                                                return GestureDetector(
+                                                  onTap: () => VideoPopUpScreen
+                                                      .showVideo(
+                                                          context, myVidData),
+                                                  child: SizedBox(
+                                                    child: Image.network(
+                                                      myVidData['thumbnailUrl'],
+                                                      fit: BoxFit.cover,
+                                                    ),
                                                   ),
                                                 );
                                               },

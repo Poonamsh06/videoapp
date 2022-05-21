@@ -162,14 +162,3 @@ class MyDialogBox {
     );
   }
 }
-
-
-
-// Get.defaultDialog(
-//   title: title,
-//   titleStyle: kBigSizeBoldTextStyle.copyWith(
-//     color: Colors.blue,
-//   ),
-//   content: const CircularProgressIndicator(),
-//   barrierDismissible: true,
-// );

@@ -30,12 +30,6 @@ const kSmallSizeBoldTextStyle = TextStyle(
   fontWeight: FontWeight.bold,
 );
 
-const kWSmallSizeBoldTextStyle = TextStyle(
-  fontSize: 15,
-  fontWeight: FontWeight.bold,
-  color: Colors.white,
-);
-
 const kBigSizeTextStyle = TextStyle(
   fontSize: 25,
 );
@@ -43,6 +37,46 @@ const kBigSizeTextStyle = TextStyle(
 const kBigSizeBoldTextStyle = TextStyle(
   fontSize: 25,
   fontWeight: FontWeight.bold,
+);
+
+//////////////////////////////  primary  ///////////////////////////
+
+const kPNormalSizeTextStyle = TextStyle(
+  fontSize: 20,
+  color: Colors.blue,
+);
+
+const kPNormalSizeBoldTextStyle = TextStyle(
+  fontSize: 20,
+  fontWeight: FontWeight.bold,
+  color: Colors.blue,
+);
+
+const kPSmallSizeTextStyle = TextStyle(
+  fontSize: 15,
+  color: Colors.blue,
+);
+
+const kPVerySmallSizeTextStyle = TextStyle(
+  fontSize: 12,
+  color: Colors.blue,
+);
+
+const kPSmallSizeBoldTextStyle = TextStyle(
+  fontSize: 15,
+  fontWeight: FontWeight.bold,
+  color: Colors.blue,
+);
+
+const kPBigSizeTextStyle = TextStyle(
+  fontSize: 25,
+  color: Colors.blue,
+);
+
+const kPBigSizeBoldTextStyle = TextStyle(
+  fontSize: 25,
+  fontWeight: FontWeight.bold,
+  color: Colors.blue,
 );
 
 //////////////////////////////  white  ///////////////////////////
@@ -56,6 +90,12 @@ const kWNormalSizeBoldTextStyle = TextStyle(
   fontSize: 20,
   color: Colors.white,
   fontWeight: FontWeight.bold,
+);
+
+const kWSmallSizeBoldTextStyle = TextStyle(
+  fontSize: 15,
+  fontWeight: FontWeight.bold,
+  color: Colors.white,
 );
 
 const kWSmallSizeTextStyle = TextStyle(

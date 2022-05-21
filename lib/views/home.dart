@@ -71,17 +71,21 @@ class _HomeState extends State<Home> {
   }
 
   void showVideoOptions() async {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        actions: [
+    Get.defaultDialog(
+      titlePadding: const EdgeInsets.only(top: 10),
+      title: 'Wanna add ?',
+      titleStyle: kPNormalSizeBoldTextStyle,
+      barrierDismissible: true,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 5),
+      radius: 10,
+      content: Column(
+        children: [
           ListTile(
             onTap: () => pickVideo(ImageSource.gallery),
             title: const Text(
               'add from gallery',
               style: kNormalSizeTextStyle,
             ),
-            selectedColor: Theme.of(context).primaryColor,
             leading: const Icon(
               Icons.photo,
               size: 30,
@@ -93,7 +97,6 @@ class _HomeState extends State<Home> {
               'create a new one',
               style: kNormalSizeTextStyle,
             ),
-            selectedColor: Theme.of(context).primaryColor,
             leading: const Icon(
               Icons.add_a_photo,
               size: 30,
@@ -102,6 +105,37 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
+    // showDialog(
+    //   context: context,
+    //   builder: (context) => AlertDialog(
+    //     actions: [
+    //       ListTile(
+    //         onTap: () => pickVideo(ImageSource.gallery),
+    //         title: const Text(
+    //           'add from gallery',
+    //           style: kNormalSizeTextStyle,
+    //         ),
+    //         selectedColor: Theme.of(context).primaryColor,
+    //         leading: const Icon(
+    //           Icons.photo,
+    //           size: 30,
+    //         ),
+    //       ),
+    //       ListTile(
+    //         onTap: () => pickVideo(ImageSource.camera),
+    //         title: const Text(
+    //           'create a new one',
+    //           style: kNormalSizeTextStyle,
+    //         ),
+    //         selectedColor: Theme.of(context).primaryColor,
+    //         leading: const Icon(
+    //           Icons.add_a_photo,
+    //           size: 30,
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    // );
   }
 
   @override
