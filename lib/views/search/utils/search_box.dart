@@ -1,8 +1,12 @@
+import 'package:biscuit1/models/userModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../profile/profile_screen.dart';
 
 class Search_box extends StatefulWidget {
-  Search_box({Key? key}) : super(key: key);
+  const Search_box({Key? key}) : super(key: key);
 
   @override
   State<Search_box> createState() => _Search_boxState();
@@ -10,7 +14,8 @@ class Search_box extends StatefulWidget {
 
 class _Search_boxState extends State<Search_box> {
   bool isLoading = false;
-   Map<String, dynamic>? usersMap;
+  UserModel? user;
+  //  Map<String, dynamic>? usersMap;
   TextEditingController searchController = TextEditingController();
 
   void onSearch() async {
@@ -19,29 +24,25 @@ class _Search_boxState extends State<Search_box> {
       setState(() {
         isLoading = true;
       });
-      await _firestore
-          .collection('users')
-          .where("Email", isEqualTo: searchController.text.trim())
-          .get()
-          .then((value) {
-        setState(() {
-          usersMap = value.docs[0].data();
-          isLoading = false;
-        });
 
-        print(usersMap);
-        print("suraj is goog boy");
-      });
+      _firestore
+          .collection('users')
+          .where(
+            "name",
+            isGreaterThanOrEqualTo: searchController.text.trim(),
+          )
+          .snapshots();
     } catch (e) {
       setState(() {
         isLoading = false;
       });
-      print("user not found");
+      const Center(child: Text('user not found'));
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    var length = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         body: isLoading
@@ -50,63 +51,117 @@ class _Search_boxState extends State<Search_box> {
               )
             : Column(
                 children: [
+                  // search wala container
                   Padding(
                     padding: const EdgeInsets.only(top: 5),
                     child: Container(
-                      // search wala container
+                      height: length.height * 0.05,
                       padding: const EdgeInsets.symmetric(horizontal: 8),
                       margin: const EdgeInsets.symmetric(
                           horizontal: 3, vertical: 0),
                       decoration: BoxDecoration(
                           color: Colors.grey[400],
                           borderRadius: BorderRadius.circular(24)),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: onSearch,
-                            child: Container(
-                              child: const Icon(
-                                Icons.search,
-                                color: Colors.blueAccent,
-                              ),
-                              margin: EdgeInsets.fromLTRB(3, 0, 7, 0),
-                            ),
-                          ),
-                          Expanded(
-                            child: TextField(
-                              controller: searchController,
-                              decoration: const InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: "Lets search someone"),
-                            ),
-                          ),
-                          GestureDetector(
-                            onTap: () {},
-                            child: Container(
-                              child: Icon(
-                                Icons.person,
-                                color: Colors.grey[600],
-                              ),
-                              margin: const EdgeInsets.fromLTRB(3, 0, 7, 0),
-                            ),
-                          ),
-                        ],
+                      child: TextField(
+                        controller: searchController,
+                        onChanged: (value) {
+                          setState(() {});
+                        },
+                        decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                                onPressed: () {
+                                  onSearch();
+                                },
+                                icon: const Icon(
+                                  Icons.search,
+                                )),
+                            border: InputBorder.none,
+                            prefixIcon: const Icon(Icons.person),
+                            hintText: "Lets search someone"),
                       ),
                     ),
                   ),
-                  usersMap != null
-                      ? ListTile(
-                        leading:const  Icon(Icons.person),
-                          title: Text(usersMap!['Email']),
-                        )
-                      : Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Text("Lets find friends "),
-                            
-                        ],
-                      )
+                  Expanded(
+                    child: StreamBuilder(
+                      stream: FirebaseFirestore.instance
+                          .collection('users')
+                          .where(
+                            'name',
+                            isGreaterThanOrEqualTo:
+                                searchController.text.trim(),
+                          )
+                          .snapshots(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.active) {
+                          if (snapshot.hasData) {
+                            QuerySnapshot dataSnapshot =
+                                snapshot.data as QuerySnapshot;
+                            if (dataSnapshot.docs.isNotEmpty) {
+                              return ListView.builder(
+                                itemCount: dataSnapshot.docs.length,
+                                itemBuilder: (context, index) {
+                                  Map<String, dynamic> userMap =
+                                      dataSnapshot.docs[index].data()
+                                          as Map<String, dynamic>;
+                                  UserModel searchedUser =
+                                      UserModel.fromMap(userMap);
+
+                                  return ListTile(
+                                    leading: ClipRRect(
+                                      borderRadius: BorderRadius.circular(25),
+                                      child: CircleAvatar(
+                                        backgroundColor: Theme.of(context)
+                                            .colorScheme
+                                            .secondary
+                                            .withAlpha(100),
+                                        radius: 25,
+                                        child: Image.network(
+                                          searchedUser.profilepic!,
+                                          fit: BoxFit.cover,
+                                          errorBuilder:
+                                              ((context, error, stackTrace) {
+                                            return const Icon(
+                                                Icons.account_circle_rounded);
+                                          }),
+                                        ),
+                                      ),
+                                    ),
+                                    title: Text(searchedUser.name.toString()),
+                                    subtitle:
+                                        Text(searchedUser.email.toString()),
+                                    trailing: const Icon(
+                                        Icons.keyboard_arrow_right_rounded),
+                                    onTap: () async {
+                                      Get.to(() => ProfileScreen(
+                                            uid: searchedUser.uid!,
+                                          ));
+                                    },
+                                  );
+                                },
+                              );
+                            } else {
+                              return Text(
+                                'No users found ! search some...',
+                                style: TextStyle(
+                                  fontSize: 17,
+                                  color:
+                                      Theme.of(context).colorScheme.secondary,
+                                ),
+                              );
+                            }
+                          } else if (snapshot.hasError) {
+                            return const Text('an error occured !');
+                          } else {
+                            return const Text('No results found !');
+                          }
+                        } else {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+                      },
+                    ),
+                  ),
                 ],
               ),
       ),

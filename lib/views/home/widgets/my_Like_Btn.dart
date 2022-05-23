@@ -53,14 +53,14 @@ class MyLikeState extends State<MyLike> {
       videoData['isLiked'] = true;
       fire.collection('videos').doc(widget.videoId).set(videoData);
 
-      updateUsersNotification(widget.videoId.substring(0, 27));
+      updateUsersNotification(widget.videoId);
     }
   }
 
-  static updateUsersNotification(String otherId) {
+  static updateUsersNotification(String videoId) {
     //
     FirebaseHelper.updateDataToNotification(
-      othUid: otherId,
+      othUid: videoId,
       message: 'like',
       comDes: '',
     );

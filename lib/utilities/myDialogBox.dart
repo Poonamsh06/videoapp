@@ -15,7 +15,7 @@ class MyDialogBox {
     Get.defaultDialog(
       title: title,
       titleStyle: kBigSizeBoldTextStyle.copyWith(
-        color: Colors.blue,
+        color: const Color.fromARGB(255, 236, 129, 255),
       ),
       middleText: midText,
       titlePadding: const EdgeInsets.only(top: 10),
@@ -63,7 +63,7 @@ class MyDialogBox {
                 Text(
                   'loading',
                   style: kNormalSizeTextStyle.copyWith(
-                    color: Colors.blue,
+                    color: const Color.fromARGB(255, 236, 129, 255),
                   ),
                 ),
               ],
@@ -96,7 +96,7 @@ class MyDialogBox {
                 Text(
                   message,
                   style: kNormalSizeTextStyle.copyWith(
-                    color: Colors.blue,
+                    color: const Color.fromARGB(255, 236, 129, 255),
                   ),
                 ),
               ],
@@ -120,7 +120,7 @@ class MyDialogBox {
       middleTextStyle: kSmallSizeBoldTextStyle,
       title: 'OOPS',
       titleStyle: kBigSizeBoldTextStyle.copyWith(
-        color: Colors.blue,
+        color: const Color.fromARGB(255, 236, 129, 255),
       ),
       titlePadding: const EdgeInsets.only(top: 10),
       confirm: ElevatedButton.icon(

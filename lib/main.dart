@@ -36,7 +36,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'To do app',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
+        primaryColor: const Color.fromARGB(255, 236, 129, 255),
       ),
       home: screen,
       getPages: [

@@ -103,7 +103,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ],
                     expandedHeight:
-                        size.width * 0.7, //heignt of the profile section
+                        size.height * 0.35, //heignt of the profile section
                     flexibleSpace: FlexibleSpaceBar(
                       stretchModes: const [
                         StretchMode.fadeTitle,
