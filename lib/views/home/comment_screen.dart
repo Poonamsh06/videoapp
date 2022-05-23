@@ -53,7 +53,7 @@ class CommentScreen extends StatelessWidget {
 
     //
     FirebaseHelper.updateDataToNotification(
-      othUid: videoId.substring(0, 27),
+      othUid: videoId,
       message: 'comment',
       comDes: _commentController.text,
     );

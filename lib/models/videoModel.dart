@@ -56,7 +56,7 @@ class VideoModel {
       uid: snapData['uid'],
       id: snapData['id'],
       isLiked: snapData['isLiked'],
-      createdOn: snapData['createdOn'],
+      createdOn: snapData['createdOn'].toDate(),
       likes: snapData['likes'],
       commentCount: snapData['commentCount'],
       shareCount: snapData['shareCount'],

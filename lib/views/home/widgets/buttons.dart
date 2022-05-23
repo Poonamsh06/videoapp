@@ -29,7 +29,7 @@ class Like {
         likeBuilder: (like) {
           return Icon(
             like ? Icons.favorite : Icons.favorite_border_outlined,
-            color: like ? Colors.red : Colors.grey,
+            color: like ? Colors.red : Colors.white,
             size: 40,
           );
         },
@@ -71,7 +71,7 @@ class Like {
       fire.collection('videos').doc(videoId).set(videoData);
 
       //
-      MyLikeState.updateUsersNotification(videoId.substring(0, 27));
+      MyLikeState.updateUsersNotification(videoId);
       return true;
     }
   }
@@ -141,7 +141,7 @@ Widget commentButton(String id) {
     icon: const Icon(
       Icons.comment,
       size: 35,
-      color: Colors.grey,
+      color: Colors.white,
     ),
   );
 }
@@ -163,7 +163,7 @@ Widget shareButton(String url) {
     icon: const Icon(
       Icons.share_rounded,
       size: 35,
-      color: Colors.grey,
+      color: Colors.white,
     ),
   );
 }
@@ -181,7 +181,7 @@ buildMusicAlbum(String imageUrl) {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(25),
             gradient: const LinearGradient(colors: [
-              Colors.grey,
+              Colors.white,
               Colors.white,
             ]),
           ),
@@ -213,11 +213,3 @@ likeTheCommentButton(String videoId) {
     },
   );
 }
-
-
-// await fire.runTransaction((Transaction myTransaction) async {
-//         myTransaction.delete(fire
-//             .collection('videos')
-//             .doc(videoId)
-//             .collection('like')
-//             .doc(userId));

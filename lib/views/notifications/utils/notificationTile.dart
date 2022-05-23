@@ -18,18 +18,13 @@ class NotificationTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String message = '';
-    String description = '';
-    final List choices = ['follow', 'comment', 'like'];
-    String state = choices[0];
 
     if (notiDocData['message'] == 'follow') {
       message = ' started following you.';
     } else if (notiDocData['message'] == 'comment') {
       message = ' has commented on your video';
-      state = choices[1];
     } else if (notiDocData['message'] == 'like') {
       message = ' has liked your video';
-      state = choices[2];
     }
 
     return ExpansionTile(
@@ -50,10 +45,6 @@ class NotificationTile extends StatelessWidget {
                 Get.to(() => ProfileScreen(uid: notiDocData['notId']));
               },
           ),
-          TextSpan(
-            text: message,
-            style: kSmallSizeTextStyle,
-          )
         ],
       )),
       trailing: Column(

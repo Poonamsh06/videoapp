@@ -7,6 +7,7 @@ class NotifyModel {
   String message;
   String commentDescription;
   String profilePic;
+  String? videoId;
 
   NotifyModel({
     required this.username,
@@ -15,6 +16,7 @@ class NotifyModel {
     required this.createdOn,
     required this.commentDescription,
     required this.profilePic,
+    this.videoId,
   });
 
   Map<String, dynamic> toMap() {
@@ -25,6 +27,7 @@ class NotifyModel {
       'commentDescription': commentDescription,
       'createdOn': createdOn,
       'profilePic': profilePic,
+      'videoId': videoId,
     };
   }
 
@@ -37,6 +40,7 @@ class NotifyModel {
       commentDescription: snapData['commentDescription'],
       createdOn: snapData['createdOn'],
       profilePic: snapData['profilePic'],
+      videoId: snapData['videoId'],
     );
   }
 }

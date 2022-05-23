@@ -29,7 +29,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  int _currIndex = 4;
+  int _currIndex = 0;
   XFile? _videoFile;
 
   final myPages = [
@@ -105,37 +105,6 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
-    // showDialog(
-    //   context: context,
-    //   builder: (context) => AlertDialog(
-    //     actions: [
-    //       ListTile(
-    //         onTap: () => pickVideo(ImageSource.gallery),
-    //         title: const Text(
-    //           'add from gallery',
-    //           style: kNormalSizeTextStyle,
-    //         ),
-    //         selectedColor: Theme.of(context).primaryColor,
-    //         leading: const Icon(
-    //           Icons.photo,
-    //           size: 30,
-    //         ),
-    //       ),
-    //       ListTile(
-    //         onTap: () => pickVideo(ImageSource.camera),
-    //         title: const Text(
-    //           'create a new one',
-    //           style: kNormalSizeTextStyle,
-    //         ),
-    //         selectedColor: Theme.of(context).primaryColor,
-    //         leading: const Icon(
-    //           Icons.add_a_photo,
-    //           size: 30,
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // );
   }
 
   @override
@@ -154,65 +123,41 @@ class _HomeState extends State<Home> {
           }
         },
         destinations: [
-          navigation_destination(Icons.home, Icons.home_outlined, "Home"),
-          navigation_destination(
-              FontAwesomeIcons.searchengin, Icons.search, "Search"),
-          navigation_destination(Icons.photo_camera_back,
-              Icons.video_camera_back_outlined, "Video"),
-          navigation_destination(
-              Icons.message, Icons.forum_outlined, "messages"),
-          navigation_destination(Icons.person, Icons.person_outline, "Profile")
+          navigationDestination(
+            Icons.home,
+            Icons.home_outlined,
+            "Home",
+          ),
+          navigationDestination(
+            FontAwesomeIcons.searchengin,
+            Icons.search,
+            "Search",
+          ),
+          navigationDestination(
+            Icons.photo_camera_back,
+            Icons.video_camera_back_outlined,
+            "Video",
+          ),
+          navigationDestination(
+            Icons.message,
+            Icons.forum_outlined,
+            "messages",
+          ),
+          navigationDestination(
+            Icons.person,
+            Icons.person_outline,
+            "Profile",
+          ),
         ],
       ),
       body: myPages[_currIndex],
-      // body: Scaffold(
-      //   body: PageView.builder(
-      //     itemCount: 10,
-      //     controller: PageController(initialPage: 0, viewportFraction: 1),
-      //     scrollDirection: Axis.vertical,
-      //     itemBuilder: (context, index) => Stack(
-      //       alignment: Alignment.bottomCenter,
-      //       children: [
-      //         Container(
-      //           decoration: const BoxDecoration(
-      //             image: DecorationImage(
-      //               image: AssetImage("assests/demo-image.jpg"),
-      //               fit: BoxFit.cover,
-      //             ),
-      //           ),
-      //         ),
-      //         Row(
-      //           crossAxisAlignment: CrossAxisAlignment.end,
-      //           children: [
-      //             Expanded(
-      //               flex: 3,
-      //               child: Container(
-      //                 height: MediaQuery.of(context).size.height / 4,
-      //                 color: Colors.transparent,
-      //               ),
-      //             ),
-      //             Expanded(
-      //               child: SizedBox(
-      //                 height: MediaQuery.of(context).size.height / 1.75,
-      //                 child: Padding(
-      //                   padding: const EdgeInsets.only(top: 90),
-      //                   child: HomeSlideBar(),
-      //                 ),
-      //               ),
-      //             )
-      //           ],
-      //         )
-      //       ],
-      //     ),
-      //   ),
-      // ),
     );
   }
 
-  NavigationDestination navigation_destination(
-      IconData Sicon, IconData icon, String text) {
+  NavigationDestination navigationDestination(
+      IconData sicon, IconData icon, String text) {
     return NavigationDestination(
-      selectedIcon: Icon(Sicon),
+      selectedIcon: Icon(sicon),
       icon: Icon(icon),
       label: text,
     );
