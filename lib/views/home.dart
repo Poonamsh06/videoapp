@@ -22,7 +22,9 @@ class Home extends StatefulWidget {
   Home({
     Key? key,
     required this.user,
+    this.recIndex,
   }) : super(key: key);
+  int? recIndex = 0;
 
   @override
   State<Home> createState() => _HomeState();
@@ -105,6 +107,12 @@ class _HomeState extends State<Home> {
         ],
       ),
     );
+  }
+
+  @override
+  void initState() {
+    if (widget.recIndex != null) setState(() => _currIndex = widget.recIndex!);
+    super.initState();
   }
 
   @override

@@ -41,7 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   fetchAndSetData() async {
     if (widget.uid == auth.currentUser!.uid) {
-      Get.offAll(() => Home(user: auth.currentUser!));
+      Get.offAll(() => Home(user: auth.currentUser!, recIndex: 4));
     } else {
       final usermodel = await FirebaseHelper.fetchUserDetailsByUid(
         uid: widget.uid == '' ? userID : widget.uid,
@@ -87,7 +87,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size.height -
+        AppBar().preferredSize.height -
+        MediaQuery.of(context).padding.top;
     return Scaffold(
       body: Container(
         color: Colors.black,
@@ -102,8 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         onPressed: () => logOut(),
                       ),
                     ],
-                    expandedHeight:
-                        size.height * 0.35, //heignt of the profile section
+                    expandedHeight: size * 0.45, //heignt of the profile section
                     flexibleSpace: FlexibleSpaceBar(
                       stretchModes: const [
                         StretchMode.fadeTitle,
@@ -112,13 +113,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                       background: SizedBox(
                         width: double.infinity,
+                        // height: size,
                         child: Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              const SizedBox(height: 100),
+                              // const SizedBox(height: 70),
+                              const Spacer(),
                               //name section =========================================
                               NameSection(done: _done, um: um),
                               //followiing section ===================================
@@ -227,7 +230,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     ),
                                     SizedBox(
                                       width: double.infinity,
-                                      height: size.height - 160,
+                                      height: size - 160,
                                       child: myVidSnap.docs.isEmpty
                                           ? const Center(
                                               child: Padding(

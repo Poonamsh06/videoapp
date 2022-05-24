@@ -5,14 +5,14 @@ import 'package:get/get.dart';
 
 import '../../profile/profile_screen.dart';
 
-class Search_box extends StatefulWidget {
-  const Search_box({Key? key}) : super(key: key);
+class SearchBox extends StatefulWidget {
+  const SearchBox({Key? key}) : super(key: key);
 
   @override
-  State<Search_box> createState() => _Search_boxState();
+  State<SearchBox> createState() => _SearchBoxState();
 }
 
-class _Search_boxState extends State<Search_box> {
+class _SearchBoxState extends State<SearchBox> {
   bool isLoading = false;
   UserModel? user;
   //  Map<String, dynamic>? usersMap;
@@ -132,11 +132,8 @@ class _Search_boxState extends State<Search_box> {
                                         Text(searchedUser.email.toString()),
                                     trailing: const Icon(
                                         Icons.keyboard_arrow_right_rounded),
-                                    onTap: () async {
-                                      Get.to(() => ProfileScreen(
-                                            uid: searchedUser.uid!,
-                                          ));
-                                    },
+                                    onTap: () => Get.to(() =>
+                                        ProfileScreen(uid: searchedUser.uid!)),
                                   );
                                 },
                               );
