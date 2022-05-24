@@ -18,11 +18,12 @@ class NameSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        CircleAvatar(
-          radius: 40,
+    return SizedBox(
+      height: 120,
+      child: ListTile(
+        contentPadding: const EdgeInsets.all(20),
+        leading: CircleAvatar(
+          radius: 45,
           backgroundColor: Theme.of(context).primaryColor.withOpacity(0.5),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(40),
@@ -31,25 +32,18 @@ class NameSection extends StatelessWidget {
                 : Image.asset('assests/user.jpg'),
           ),
         ),
-        SizedBox(
-          height: 90,
-          width: 250,
-          child: SingleChildScrollView(
-            child: ListTile(
-              title: Text(
-                done ? um!.name! : '',
-                style: kWNormalSizeBoldTextStyle.copyWith(
-                  letterSpacing: 1.5,
-                ),
-              ),
-              subtitle: Text(
-                done ? um!.aboutme! : '',
-                style: kWSmallSizeTextStyle,
-              ),
-            ),
+        title: Text(
+          done ? um!.name! : '',
+          style: kWNormalSizeBoldTextStyle.copyWith(
+            letterSpacing: 1.5,
           ),
         ),
-      ],
+        subtitle: Text(
+          done ? um!.aboutme! : '',
+          style: kWSmallSizeTextStyle,
+        ),
+        visualDensity: const VisualDensity(horizontal: 4, vertical: 4),
+      ),
     );
   }
 }

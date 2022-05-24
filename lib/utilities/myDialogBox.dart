@@ -128,16 +128,16 @@ class MyDialogBox {
         onPressed: yesFun,
         label: Text(
           yesName,
-          style: kNormalSizeTextStyle,
+          style: kSmallSizeTextStyle,
         ),
         style: ElevatedButton.styleFrom(
           elevation: 10,
           padding: const EdgeInsets.symmetric(
-            horizontal: 15,
-            vertical: 7,
+            horizontal: 10,
+            vertical: 5,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
       ),
@@ -146,16 +146,16 @@ class MyDialogBox {
         onPressed: noFun,
         label: Text(
           noName,
-          style: kNormalSizeTextStyle,
+          style: kSmallSizeTextStyle,
         ),
         style: ElevatedButton.styleFrom(
           elevation: 10,
           padding: const EdgeInsets.symmetric(
-            horizontal: 15,
-            vertical: 7,
+            horizontal: 10,
+            vertical: 5,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
       ),

@@ -17,16 +17,6 @@ class NotificationTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String message = '';
-
-    if (notiDocData['message'] == 'follow') {
-      message = ' started following you.';
-    } else if (notiDocData['message'] == 'comment') {
-      message = ' has commented on your video';
-    } else if (notiDocData['message'] == 'like') {
-      message = ' has liked your video';
-    }
-
     return ExpansionTile(
       leading: CircleAvatar(
         backgroundColor: Theme.of(context).primaryColor.withAlpha(100),

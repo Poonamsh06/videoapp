@@ -11,6 +11,9 @@ class VideoPopUpScreen extends StatelessWidget {
   final String videoUrl;
 
   static void showVideo(BuildContext context, Map<String, dynamic> vidData) {
+    final height = MediaQuery.of(context).size.height -
+        AppBar().preferredSize.height -
+        MediaQuery.of(context).padding.top;
     final size = MediaQuery.of(context).size;
     Get.dialog(
       Scaffold(
@@ -44,7 +47,7 @@ class VideoPopUpScreen extends StatelessWidget {
                   children: [
                     SizedBox(
                       width: size.width * 0.8,
-                      height: size.height * 0.6,
+                      height: height * 0.6,
                       child: VideoPlayerItem(videoUrl: vidData['videoUrl']),
                     ),
                     Container(

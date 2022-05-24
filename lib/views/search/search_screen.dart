@@ -38,7 +38,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   child: InkWell(
                     onTap: (() {
                       // yor method here
-                      Get.to(() => const Search_box());
+                      Get.to(() => const SearchBox());
                     }),
                     child: Row(children: [
                       Container(
