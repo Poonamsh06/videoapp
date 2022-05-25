@@ -221,24 +221,6 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
                     ),
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    // const Text('change number ?'),
-                    // const SizedBox(width: 15),
-                    // TextButton(
-                    //   child: const Text('Resend'),
-                    //   onPressed: () {
-                    //     setState(() => _mode = Mode.submit);
-                    //     _saveForm();
-                    //     MySnackBar.showBottomSnackBar(
-                    //       context,
-                    //       'resending the otp, please wait ....',
-                    //     );
-                    //   },
-                    // ),
-                  ],
-                ),
               ],
             ),
           ]),

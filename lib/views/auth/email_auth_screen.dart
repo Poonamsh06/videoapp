@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import '../../controllers/Auth/email_controller.dart';
 import '../../models/userModel.dart';
 import '../../utilities/constants.dart';
@@ -282,7 +283,6 @@ class _EmailAuthScreenState extends State<EmailAuthScreen> {
           email: _email,
           password: _confirmPwd1,
         );
-        print("hello");
         setState(() => success = true);
         FirebaseFirestore _firestore = FirebaseFirestore.instance;
         await _firestore.collection('users').doc(_auth.currentUser!.uid).set({
@@ -321,6 +321,10 @@ class _EmailAuthScreenState extends State<EmailAuthScreen> {
           );
           setState(() => isEmailVerified = true);
           _timer!.cancel();
+
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          prefs.setStringList('listOfMyModel', newUserModel!.toList());
+
           Get.to(Home(user: userCredential!.user!));
         } else {
           await EmailController.sendVerificationLink();

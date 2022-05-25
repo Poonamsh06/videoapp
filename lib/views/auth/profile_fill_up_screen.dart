@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../controllers/Auth/email_controller.dart';
 import '../../controllers/Video/profile_controller.dart';
@@ -151,6 +152,9 @@ class _ProfileFillUpScreenState extends State<ProfileFillUpScreen> {
         widget.user,
         newlyCompletedUserModel,
       );
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setStringList('listOfMyModel', newlyCompletedUserModel.toList());
 
       MyDialogBox.showDefaultDialog(
         'Hurray !',

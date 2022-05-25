@@ -1,13 +1,15 @@
+import 'dart:developer';
+
 import 'package:biscuit1/controllers/Auth/email_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../helpers/firebase_helper.dart';
 import '../../models/userModel.dart';
 import '../../utilities/constants.dart';
-import '../../utilities/myDialogBox.dart';
 import '../../views/home.dart';
 
 class GoogleAuthController extends GetxController {
@@ -47,16 +49,19 @@ class GoogleAuthController extends GetxController {
         );
 
         await EmailController.uploadUserDataToFirestore(user, userModel!);
+
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setStringList('listOfMyModel', userModel!.toList());
       } else {
         await EmailController.uploadUserDataToFirestore(user, beforeUserModel);
+
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setStringList('listOfMyModel', beforeUserModel.toList());
       }
 
       Get.offAll(() => Home(user: user));
     } catch (e) {
-      MyDialogBox.showDefaultDialog(
-        'Note',
-        'please choose any one of your emails to proceed.',
-      );
+      log('=================error====================$e');
     }
   }
 

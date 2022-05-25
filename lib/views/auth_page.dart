@@ -107,6 +107,7 @@ class Signin extends StatelessWidget {
                         title: "Google",
                         icon: FontAwesomeIcons.google,
                         onPressed: () => controller.loginWithGoogle(),
+                        // onPressed: () => FirebaseHelper.logOut(),
                       ),
                       const SizedBox(
                         width: 20,

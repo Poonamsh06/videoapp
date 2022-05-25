@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +15,13 @@ Future<void> main() async {
   // log(currentUser.phoneNumber.toString());
 
   if (currentUser != null) {
-    log(currentUser.email.toString());
     runApp(MyApp(Home(user: currentUser)));
   } else {
     runApp(MyApp(Signin()));
   }
 }
+
+// listOfMyModel  key of userModel of current user for shared preferences
 
 class MyApp extends StatelessWidget {
   MyApp(this.screen);
@@ -40,6 +39,7 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color.fromARGB(255, 236, 129, 255),
       ),
       home: screen,
+      // home: Signin(),
       getPages: [
         GetPage(name: '/', page: () => Signin()),
       ],

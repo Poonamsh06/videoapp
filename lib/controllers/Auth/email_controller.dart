@@ -42,7 +42,6 @@ class EmailController {
     try {
       final user = auth.currentUser;
       await user!.sendEmailVerification();
-      // hideBtn();
     } on FirebaseAuthException catch (e) {
       MyDialogBox.showDefaultDialog(
         e.code,

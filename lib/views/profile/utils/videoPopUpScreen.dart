@@ -72,11 +72,12 @@ class VideoPopUpScreen extends StatelessWidget {
                             videoId: vidData['id'],
                           ),
                           //
-                          commentButton(vidData['id']),
+                          commentButton(vidData['id'], Colors.purple),
                           //
                           Padding(
                             padding: const EdgeInsets.only(bottom: 3),
-                            child: shareButton(vidData['videoUrl']),
+                            child:
+                                shareButton(vidData['videoUrl'], Colors.purple),
                           ),
                         ],
                       ),

@@ -1,20 +1,22 @@
 import 'package:biscuit1/helpers/firebase_helper.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-import '../../../models/userModel.dart';
 import '../../../utilities/constants.dart';
 
 // ================================================================ NAME SECTION
 class NameSection extends StatelessWidget {
   const NameSection({
     Key? key,
-    required this.done,
-    required this.um,
+    // required this.done,
+    required this.profilePic,
+    required this.name,
+    required this.about,
   }) : super(key: key);
 
-  final bool done;
-  final UserModel? um;
+  // final bool done;
+  final String profilePic;
+  final String name;
+  final String about;
 
   @override
   Widget build(BuildContext context) {
@@ -27,19 +29,22 @@ class NameSection extends StatelessWidget {
           backgroundColor: Theme.of(context).primaryColor.withOpacity(0.5),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(40),
-            child: done
-                ? Image.network(um!.profilepic!)
-                : Image.asset('assests/user.jpg'),
+            child: profilePic != ''
+                ? Image.network(profilePic)
+                : const Icon(
+                    Icons.account_circle_rounded,
+                    size: 70,
+                  ),
           ),
         ),
         title: Text(
-          done ? um!.name! : '',
+          name,
           style: kWNormalSizeBoldTextStyle.copyWith(
             letterSpacing: 1.5,
           ),
         ),
         subtitle: Text(
-          done ? um!.aboutme! : '',
+          about,
           style: kWSmallSizeTextStyle,
         ),
         visualDensity: const VisualDensity(horizontal: 4, vertical: 4),
@@ -49,38 +54,14 @@ class NameSection extends StatelessWidget {
 }
 
 // ============================================================= FOLLOW ROW TILE
-Column buildFollowTile(String title, String uid) {
+Column buildFollowTile(String title, String count) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      StreamBuilder(
-          stream:
-              fire.collection('users').doc(uid).collection(title).snapshots(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-//
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                    child: Text('...', style: kWNormalSizeBoldTextStyle));
-              }
-//
-              final userSnap = snapshot.data as QuerySnapshot;
-              final count = userSnap.docs.length;
-
-              if (count == 0) {
-                return const Text('0', style: kWNormalSizeBoldTextStyle);
-              } else {
-                return Text(
-                  count.toString(),
-                  style: kWNormalSizeBoldTextStyle,
-                );
-              }
-//
-            } else {
-              return const Center(
-                  child: Text('...', style: kWNormalSizeBoldTextStyle));
-            }
-          }),
+      Text(
+        count.toString(),
+        style: kWNormalSizeBoldTextStyle,
+      ),
       Text(
         title,
         style: kWSmallSizeTextStyle,
