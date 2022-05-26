@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:biscuit1/models/userModel.dart';
 import 'package:biscuit1/utilities/myDialogBox.dart';
 import 'package:biscuit1/views/auth/profile_fill_up_screen.dart';
@@ -24,8 +26,9 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   //
   String userID = auth.currentUser!.uid;
-  // UserModel? um;
+  String shdPassUid = '';
   bool _done = false;
+  bool isMe = true;
 
   List<String> tags = [
     "travel",
@@ -34,16 +37,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
     "LifeStyle",
   ];
 
-  void isMe() async {
-    if (widget.uid == '') {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      final userModelList = prefs.getStringList('listOfMyModel');
+  void setDataOfUser() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    final userModelList = prefs.getStringList('listOfMyModel');
 
-      if (userModelList == null) {
-        Get.off(Signin());
-        return;
-      }
-
+    if (userModelList == null) {
+      Get.off(Signin());
+      return;
+    }
+    if (widget.uid == userModelList[0]) {
+      //
       UserModel myModel = UserModel(
         uid: userModelList[0],
         name: userModelList[1],
@@ -59,6 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
       if (myModel.isprofilecomplete) {
         setState(() {
+          shdPassUid = myModel.uid!;
           myName = myModel.name!;
           myAbout = myModel.aboutme!;
           myProfile = myModel.profilepic!;
@@ -66,10 +70,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
           myfwlng = myModel.following.toString();
           myVidTitle = ' My Collections';
           _done = true;
+          isMe = true;
         });
       } else {
         //if profile not complete =====================
         setState(() {
+          shdPassUid = myModel.uid!;
           myName = '';
           myAbout = '';
           myProfile = '';
@@ -77,6 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           myfwlng = '0';
           myVidTitle = ' My Collections';
           _done = true;
+          isMe = true;
         });
         MyDialogBox.showConfirmDialogBox(
           message: 'hey, please complete your profile before adding videos',
@@ -95,13 +102,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
       );
       if (othUserModel == null) return;
       setState(() {
+        shdPassUid = othUserModel.uid!;
         myName = othUserModel.name!;
         myAbout = othUserModel.aboutme!;
         myProfile = othUserModel.profilepic!;
         myflwrs = othUserModel.followers.toString();
         myfwlng = othUserModel.following.toString();
+        log(myflwrs = othUserModel.followers.toString());
+        log(myfwlng = othUserModel.following.toString());
         myVidTitle = ' ${othUserModel.name}\'s collections';
         _done = true;
+        isMe = false;
+        othUid = widget.uid;
       });
     }
   }
@@ -116,7 +128,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   void initState() {
-    Future.delayed(const Duration(milliseconds: 1)).then((value) => isMe());
+    Future.delayed(const Duration(milliseconds: 1)).then(
+      (value) => setDataOfUser(),
+    );
     super.initState();
   }
 
@@ -135,10 +149,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SliverAppBar(
                 backgroundColor: Colors.transparent,
                 actions: [
-                  IconButton(
-                    icon: const Icon(Icons.logout),
-                    onPressed: () => FirebaseHelper.logOut(),
-                  ),
+                  if (isMe)
+                    IconButton(
+                      icon: const Icon(Icons.logout),
+                      onPressed: () => FirebaseHelper.logOut(),
+                    ),
                 ],
                 expandedHeight: size * 0.45, //heignt of the profile section
                 flexibleSpace: FlexibleSpaceBar(
@@ -170,12 +185,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                buildFollowTile('followers', myflwrs),
+                                if (_done)
+                                  buildFollowTile('followers', shdPassUid),
+                                if (!_done) const Text('...'),
                                 horDivider(),
-                                buildFollowTile('following', myfwlng),
-                                if (widget.uid != '') horDivider(),
-                                if (widget.uid != '')
-                                  FollowButton(othUid: othUid),
+                                if (!_done) const Text('...'),
+                                if (_done)
+                                  buildFollowTile('following', shdPassUid),
+                                if (!isMe) horDivider(),
+                                if (!isMe) FollowButton(othUid: othUid),
                               ],
                             ),
                           ),

@@ -87,7 +87,10 @@ class FirebaseHelper {
       finalId = othUid.trim().substring(0, 28);
     }
 
-    final myModel = await fetchUserDetailsByUid(uid: auth.currentUser!.uid);
+    final myModel = await fetchUserDetailsByUid(
+      uid: auth.currentUser!.uid,
+      no: true,
+    );
     if (myModel == null) return;
 
     final uuid = const Uuid().v1();

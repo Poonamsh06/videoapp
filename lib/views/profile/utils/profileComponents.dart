@@ -1,4 +1,5 @@
 import 'package:biscuit1/helpers/firebase_helper.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utilities/constants.dart';
@@ -7,13 +8,11 @@ import '../../../utilities/constants.dart';
 class NameSection extends StatelessWidget {
   const NameSection({
     Key? key,
-    // required this.done,
     required this.profilePic,
     required this.name,
     required this.about,
   }) : super(key: key);
 
-  // final bool done;
   final String profilePic;
   final String name;
   final String about;
@@ -54,14 +53,62 @@ class NameSection extends StatelessWidget {
 }
 
 // ============================================================= FOLLOW ROW TILE
-Column buildFollowTile(String title, String count) {
+// Column buildFollowTile(String title, String count) {
+//   //
+//      final folSnap = await fire
+//         .collection('users')
+//         .doc(widget.othUid)
+//         .collection('followers')
+//         .doc(auth.currentUser!.uid)
+//         .get();
+
+//   return Column(
+//     mainAxisAlignment: MainAxisAlignment.center,
+//     children: [
+//       Text(
+//         count.toString(),
+//         style: kWNormalSizeBoldTextStyle,
+//       ),
+//       Text(
+//         title,
+//         style: kWSmallSizeTextStyle,
+//       ),
+//     ],
+//   );
+// }
+
+Column buildFollowTile(String title, String uid) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.center,
     children: [
-      Text(
-        count.toString(),
-        style: kWNormalSizeBoldTextStyle,
-      ),
+      StreamBuilder(
+          stream:
+              fire.collection('users').doc(uid).collection(title).snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+//
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                    child: Text('...', style: kWNormalSizeBoldTextStyle));
+              }
+//
+              final userSnap = snapshot.data as QuerySnapshot;
+              final count = userSnap.docs.length;
+
+              if (count == 0) {
+                return const Text('0', style: kWNormalSizeBoldTextStyle);
+              } else {
+                return Text(
+                  count.toString(),
+                  style: kWNormalSizeBoldTextStyle,
+                );
+              }
+//
+            } else {
+              return const Center(
+                  child: Text('...', style: kWNormalSizeBoldTextStyle));
+            }
+          }),
       Text(
         title,
         style: kWSmallSizeTextStyle,

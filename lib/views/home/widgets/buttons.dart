@@ -90,7 +90,7 @@ buildProfileImage(Map<String, dynamic> videoData) {
             height: 55,
             child: ElevatedButton(
               onPressed: () => userId == auth.currentUser!.uid
-                  ? Get.offAll(() => Home(user: auth.currentUser!))
+                  ? Get.offAll(() => Home(user: auth.currentUser!, recIndex: 4))
                   : Get.to(() => ProfileScreen(uid: userId)),
               style: ElevatedButton.styleFrom(
                 onPrimary: const Color.fromARGB(255, 0, 140, 255),
