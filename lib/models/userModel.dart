@@ -40,6 +40,36 @@ class UserModel {
     };
   }
 
+  List<String> toList() {
+    return [
+      uid ?? '',
+      name ?? '',
+      email ?? '',
+      phone ?? '',
+      aboutme ?? '',
+      profilepic ?? '',
+      followers.toString(),
+      following.toString(),
+      success.toString(),
+      isprofilecomplete.toString(),
+    ];
+  }
+
+  // UserModel.fromList(List<String> userModelList) {
+  //   return UserModel(
+  //     uid: userModelList[0],
+  //     name: userModelList[1],
+  //     email: userModelList[2],
+  //     phone: userModelList[3],
+  //     aboutme: userModelList[4],
+  //     profilepic: userModelList[5],
+  //     followers: int.parse(userModelList[6]),
+  //     following: int.parse(userModelList[7]),
+  //     success: userModelList[8].toLowerCase() == 'true',
+  //     isprofilecomplete: userModelList[9].toLowerCase() == 'true',
+  //   );
+  // }
+
   UserModel.fromMap(Map<String, dynamic> map) {
     uid = map['uid'];
     name = map['name'];

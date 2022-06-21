@@ -8,12 +8,25 @@ import 'package:intl/intl.dart';
 import '../../../utilities/constants.dart';
 
 class NotificationTile extends StatelessWidget {
-  const NotificationTile({
+  NotificationTile({
     Key? key,
     required this.notiDocData,
   }) : super(key: key);
 
   final Map<String, dynamic> notiDocData;
+  String message = '';
+
+  String get messageCustomize {
+    if (notiDocData['message'] == 'follow') {
+      return ' started following you.';
+    } else if (notiDocData['message'] == 'comment') {
+      return ' commented on your video.';
+    } else if (notiDocData['message'] == 'like') {
+      return ' liked your video.';
+    } else {
+      return ' ';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +48,10 @@ class NotificationTile extends StatelessWidget {
                 Get.to(() => ProfileScreen(uid: notiDocData['notId']));
               },
           ),
+          TextSpan(
+            text: messageCustomize,
+            style: kSmallSizeTextStyle,
+          ),
         ],
       )),
       trailing: Column(
@@ -47,7 +64,8 @@ class NotificationTile extends StatelessWidget {
               style: kVerySmallSizeTextStyle,
             ),
           ),
-          const FollowButton(othUid: 'othUid'),
+          if (notiDocData['notId'] != auth.currentUser!.uid)
+            FollowButton(othUid: notiDocData['notId']),
         ],
       ),
       children: [

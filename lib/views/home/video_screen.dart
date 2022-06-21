@@ -97,11 +97,11 @@ class VideoScreen extends StatelessWidget {
                                   Text(videoData['likes'].toString()),
                                   //
                                   const SizedBox(height: 10),
-                                  commentButton(videoData['id']),
+                                  commentButton(videoData['id'], null),
                                   //
                                   Text(videoData['commentCount'].toString()),
                                   //
-                                  shareButton(videoData['videoUrl']),
+                                  shareButton(videoData['videoUrl'], null),
                                   //
                                   const SizedBox(height: 20),
                                   CircleVideoAnimation(

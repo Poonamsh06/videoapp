@@ -1,15 +1,24 @@
 import 'package:biscuit1/models/videoModel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:uuid/uuid.dart';
 
 import '../models/notifyModel.dart';
 import '../models/userModel.dart';
 import '../utilities/constants.dart';
 import '../utilities/myDialogBox.dart';
+import '../views/auth_page.dart';
 
 class FirebaseHelper {
   //
+
+  static void logOut() async {
+    await auth.signOut();
+    await GoogleSignIn().signOut();
+    await Get.offAll(Signin());
+  }
+
   static Future<UserModel?> fetchUserDetailsByUid({
     required String uid,
     bool? no,
@@ -78,7 +87,10 @@ class FirebaseHelper {
       finalId = othUid.trim().substring(0, 28);
     }
 
-    final myModel = await fetchUserDetailsByUid(uid: auth.currentUser!.uid);
+    final myModel = await fetchUserDetailsByUid(
+      uid: auth.currentUser!.uid,
+      no: true,
+    );
     if (myModel == null) return;
 
     final uuid = const Uuid().v1();

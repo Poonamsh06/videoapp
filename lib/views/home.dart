@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
     const SearchScreen(),
     const Center(child: Text('add')),
     const NotificationScreen(),
-    ProfileScreen(uid: ''),
+    ProfileScreen(uid: auth.currentUser!.uid),
   ];
 
   UserModel? um;

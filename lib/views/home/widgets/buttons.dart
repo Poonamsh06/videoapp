@@ -90,7 +90,7 @@ buildProfileImage(Map<String, dynamic> videoData) {
             height: 55,
             child: ElevatedButton(
               onPressed: () => userId == auth.currentUser!.uid
-                  ? Get.offAll(() => Home(user: auth.currentUser!))
+                  ? Get.offAll(() => Home(user: auth.currentUser!, recIndex: 4))
                   : Get.to(() => ProfileScreen(uid: userId)),
               style: ElevatedButton.styleFrom(
                 onPrimary: const Color.fromARGB(255, 0, 140, 255),
@@ -131,22 +131,22 @@ buildProfileImage(Map<String, dynamic> videoData) {
   );
 }
 
-Widget commentButton(String id) {
+Widget commentButton(String id, Color? color) {
   return IconButton(
     onPressed: () {
       Get.to(CommentScreen(
         videoId: id,
       ));
     },
-    icon: const Icon(
+    icon: Icon(
       Icons.comment,
       size: 35,
-      color: Colors.white,
+      color: color ?? Colors.white,
     ),
   );
 }
 
-Widget shareButton(String url) {
+Widget shareButton(String url, Color? color) {
   return IconButton(
     focusColor: const Color.fromARGB(255, 0, 140, 255),
     onPressed: () async {
@@ -160,10 +160,10 @@ Widget shareButton(String url) {
             "download and enjoy Biscuit app shorts ❤️  \n\n$urlpreview");
       }
     },
-    icon: const Icon(
+    icon: Icon(
       Icons.share_rounded,
       size: 35,
-      color: Colors.white,
+      color: color ?? Colors.white,
     ),
   );
 }

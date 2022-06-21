@@ -46,11 +46,7 @@ class NotificationScreen extends StatelessWidget {
               }
 //
             } else {
-              return const Center(
-                  child: Text(
-                'no notificatons yet start exploring',
-                style: kPNormalSizeBoldTextStyle,
-              ));
+              return const Center(child: CircularProgressIndicator());
             }
           }),
     );

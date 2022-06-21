@@ -2,6 +2,7 @@ import 'package:biscuit1/controllers/Auth/email_controller.dart';
 import 'package:biscuit1/controllers/Auth/google_auth_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/userModel.dart';
 import '../../utilities/constants.dart';
@@ -73,12 +74,19 @@ class PhoneController {
           userCredential.user,
           userModel!,
         );
+
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setStringList('listOfMyModel', userModel!.toList());
       } else {
         await EmailController.uploadUserDataToFirestore(
           userCredential.user,
           beforeUserModel,
         );
+
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setStringList('listOfMyModel', beforeUserModel.toList());
       }
+
       Get.offAll(Home(user: userCredential.user!));
     } on FirebaseAuthException catch (e) {
       Get.back();
