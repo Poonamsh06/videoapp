@@ -156,21 +156,21 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
             Column(
               children: [
                 //--------------------elevated---------------------------
-                RaisedButton(
+                ElevatedButton(
                     onPressed: () {},
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(80.0)),
-                    padding: const EdgeInsets.all(0.0),
-                    child: RaisedButton(
+                    // shape: RoundedRectangleBorder(
+                    //     borderRadius: BorderRadius.circular(80.0)),
+                    // padding: const EdgeInsets.all(0.0),
+                    child: ElevatedButton(
                       onPressed: () {
                         FocusScope.of(context).unfocus();
                         _mode == Mode.submit
                             ? _saveForm()
                             : verifyNumberWithOtp();
                       },
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0)),
-                      padding: const EdgeInsets.all(0.0),
+                      // shape: RoundedRectangleBorder(
+                      //     borderRadius: BorderRadius.circular(10.0)),
+                      // padding: const EdgeInsets.all(0.0),
                       child: Ink(
                         decoration: const BoxDecoration(
                           gradient: LinearGradient(colors: [
