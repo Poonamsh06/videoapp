@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.biscuit1">
+    package="com.example.VMedia">
    <application
-        android:label="biscuit1"
+        android:label="VMedia"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

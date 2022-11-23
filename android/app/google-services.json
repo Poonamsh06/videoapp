@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "557560879479",
-    "project_id": "biscuit-a3c94",
-    "storage_bucket": "biscuit-a3c94.appspot.com"
+    "project_number": "644698902925",
+    "project_id": "videoapp-6e93c",
+    "storage_bucket": "videoapp-6e93c.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:557560879479:android:2d3307e9d0677a3a27e972",
+        "mobilesdk_app_id": "1:644698902925:android:a9d7b479992f1b4295adc4",
         "android_client_info": {
-          "package_name": "com.example.biscuit1"
+          "package_name": "com.example.VMedia"
         }
       },
       "oauth_client": [
         {
-          "client_id": "557560879479-q2pu1pho2m99aprau9n6u8kob9fuea3f.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.biscuit1",
-            "certificate_hash": "be627b4f335db872257e4c58f32cfe80de49d96e"
-          }
-        },
-        {
-          "client_id": "557560879479-o60be54od0ete6kb2s00dd24tmopsglj.apps.googleusercontent.com",
+          "client_id": "644698902925-b2n9fjnqob8koj35n2lbkq7eendt8s5t.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCbcc94rYhnLR8p2WovpUcyC2gMG4xTtRI"
+          "current_key": "AIzaSyChqn3POD_VClVOSuHsvKmD56ZA1UYVJvQ"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "557560879479-o60be54od0ete6kb2s00dd24tmopsglj.apps.googleusercontent.com",
+              "client_id": "644698902925-b2n9fjnqob8koj35n2lbkq7eendt8s5t.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

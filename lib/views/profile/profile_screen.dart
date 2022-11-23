@@ -1,10 +1,10 @@
 import 'dart:developer';
 
-import 'package:biscuit1/models/userModel.dart';
-import 'package:biscuit1/utilities/myDialogBox.dart';
-import 'package:biscuit1/views/auth/profile_fill_up_screen.dart';
-import 'package:biscuit1/views/profile/utils/profileComponents.dart';
-import 'package:biscuit1/views/profile/utils/videoPopUpScreen.dart';
+import 'package:VMedia/models/userModel.dart';
+import 'package:VMedia/utilities/myDialogBox.dart';
+import 'package:VMedia/views/auth/profile_fill_up_screen.dart';
+import 'package:VMedia/views/profile/utils/profileComponents.dart';
+import 'package:VMedia/views/profile/utils/videoPopUpScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,4 +1,4 @@
-package com.example.biscuit1
+package com.example.VMedia
 
 import io.flutter.embedding.android.FlutterActivity
 

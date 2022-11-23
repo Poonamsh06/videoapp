@@ -1,3 +1,4 @@
+import 'package:VMedia/utilities/customButton.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -156,46 +157,57 @@ class _PhoneAuthScreenState extends State<PhoneAuthScreen> {
             Column(
               children: [
                 //--------------------elevated---------------------------
-                ElevatedButton(
-                    onPressed: () {},
-                    // shape: RoundedRectangleBorder(
-                    //     borderRadius: BorderRadius.circular(80.0)),
-                    // padding: const EdgeInsets.all(0.0),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        FocusScope.of(context).unfocus();
-                        _mode == Mode.submit
-                            ? _saveForm()
-                            : verifyNumberWithOtp();
-                      },
-                      // shape: RoundedRectangleBorder(
-                      //     borderRadius: BorderRadius.circular(10.0)),
-                      // padding: const EdgeInsets.all(0.0),
-                      child: Ink(
-                        decoration: const BoxDecoration(
-                          gradient: LinearGradient(colors: [
-                            Color.fromRGBO(143, 148, 251, 1),
-                            Color.fromRGBO(143, 148, 251, 0.6),
-                          ]),
-                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                        ),
-                        child: Container(
-                          constraints: const BoxConstraints(
-                              minWidth: 100.0,
-                              minHeight:
-                                  50.0), // min sizes for Material buttons
-                          alignment: Alignment.center,
-                          child: Text(
-                              _mode == Mode.submit ? 'Submit' : 'Verify',
-                              style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white)
-                              // textAlign: TextAlign.center,
-                              ),
-                        ),
-                      ),
-                    )),
+                // ElevatedButton(
+                //     onPressed: () {},
+                // shape: RoundedRectangleBorder(
+                //     borderRadius: BorderRadius.circular(80.0)),
+                // padding: const EdgeInsets.all(0.0),
+                // child: ElevatedButton(
+
+                //   onPressed: () {
+                //     FocusScope.of(context).unfocus();
+                //     _mode == Mode.submit
+                //         ? _saveForm()
+                //         : verifyNumberWithOtp();
+                //   },
+                //   // shape: RoundedRectangleBorder(
+                //   //     borderRadius: BorderRadius.circular(10.0)),
+                //   // padding: const EdgeInsets.all(0.0),
+                //   child:
+                CustomButton(
+                    onPressed: () {
+                      FocusScope.of(context).unfocus();
+                      _mode == Mode.submit
+                          ? _saveForm()
+                          : verifyNumberWithOtp();
+                    },
+                    title: _mode == Mode.submit ? 'Submit' : 'Verify'),
+                // GestureDetector(
+                //   onTap:,
+                //   child: Ink(
+                //     decoration: const BoxDecoration(
+                //       color: Colors.red,
+                //       gradient: LinearGradient(colors: [
+                //         Color.fromRGBO(143, 148, 251, 1),
+                //         Color.fromRGBO(143, 148, 251, 0.6),
+                //       ]),
+                //       borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                //     ),
+                //     child: Container(
+                //       constraints: const BoxConstraints(
+                //           minWidth: 80.0,
+                //           minHeight: 50.0), // min sizes for Material buttons
+                //       alignment: Alignment.center,
+                //       child: Text(_mode == Mode.submit ? 'Submit' : 'Verify',
+                //           style: const TextStyle(
+                //               fontSize: 18,
+                //               fontWeight: FontWeight.bold,
+                //               color: Colors.white)
+                //           // textAlign: TextAlign.center,
+                //           ),
+                //     ),
+                //   ),
+                // ),
                 const SizedBox(width: 10),
                 //-------------------below row-------------------------
                 Row(

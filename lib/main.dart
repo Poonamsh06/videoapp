@@ -33,7 +33,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       initialRoute: '/',
       debugShowCheckedModeBanner: false,
-      title: 'To do app',
+      title: 'V-Media',
       theme: ThemeData(
         primarySwatch: Colors.purple,
         primaryColor: const Color.fromARGB(255, 236, 129, 255),

@@ -1,9 +1,9 @@
 import 'dart:io';
 
-import 'package:biscuit1/utilities/constants.dart';
-import 'package:biscuit1/utilities/customButton.dart';
-import 'package:biscuit1/utilities/myDialogBox.dart';
-import 'package:biscuit1/views/home/widgets/compressProgressTile.dart';
+import 'package:VMedia/utilities/constants.dart';
+import 'package:VMedia/utilities/customButton.dart';
+import 'package:VMedia/utilities/myDialogBox.dart';
+import 'package:VMedia/views/home/widgets/compressProgressTile.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:video_compress/video_compress.dart';

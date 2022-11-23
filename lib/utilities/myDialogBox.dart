@@ -15,7 +15,7 @@ class MyDialogBox {
     Get.defaultDialog(
       title: title,
       titleStyle: kBigSizeBoldTextStyle.copyWith(
-        color: const Color.fromARGB(255, 236, 129, 255),
+        color: Colors.purple,
       ),
       middleText: midText,
       titlePadding: const EdgeInsets.only(top: 10),
@@ -63,7 +63,7 @@ class MyDialogBox {
                 Text(
                   'loading',
                   style: kNormalSizeTextStyle.copyWith(
-                    color: const Color.fromARGB(255, 236, 129, 255),
+                    color: Colors.purple,
                   ),
                 ),
               ],
@@ -78,28 +78,31 @@ class MyDialogBox {
     Get.dialog(Scaffold(
       backgroundColor: Colors.transparent,
       body: Center(
-        child: Container(
-          padding: const EdgeInsets.only(top: 18),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(30),
-            color: Colors.white,
-          ),
-          width: 200,
-          height: 105,
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.max,
-              children: [
-                const CircularProgressIndicator(),
-                const SizedBox(height: 12),
-                Text(
-                  message,
-                  style: kNormalSizeTextStyle.copyWith(
-                    color: const Color.fromARGB(255, 236, 129, 255),
+        child: Padding(
+          padding: const EdgeInsets.all(15.0),
+          child: Container(
+            padding: const EdgeInsets.only(top: 18),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: Colors.white,
+            ),
+            width: 200,
+            height: 105,
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
+                children: [
+                  const CircularProgressIndicator(),
+                  const SizedBox(height: 12),
+                  Text(
+                    message,
+                    style: kNormalSizeTextStyle.copyWith(
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -120,9 +123,9 @@ class MyDialogBox {
       middleTextStyle: kSmallSizeBoldTextStyle,
       title: 'OOPS',
       titleStyle: kBigSizeBoldTextStyle.copyWith(
-        color: const Color.fromARGB(255, 236, 129, 255),
+        color: Colors.purple,
       ),
-      titlePadding: const EdgeInsets.only(top: 10),
+      titlePadding: const EdgeInsets.only(top: 10, bottom: 10),
       confirm: ElevatedButton.icon(
         icon: const Icon(Icons.check),
         onPressed: yesFun,

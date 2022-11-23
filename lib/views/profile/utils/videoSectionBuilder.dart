@@ -1,4 +1,4 @@
-import 'package:biscuit1/views/profile/utils/videoPopUpScreen.dart';
+import 'package:VMedia/views/profile/utils/videoPopUpScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

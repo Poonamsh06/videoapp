@@ -1,4 +1,4 @@
-import 'package:biscuit1/helpers/firebase_helper.dart';
+import 'package:VMedia/helpers/firebase_helper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

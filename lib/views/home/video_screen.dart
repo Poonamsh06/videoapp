@@ -1,6 +1,6 @@
-import 'package:biscuit1/views/home/widgets/buttons.dart';
-import 'package:biscuit1/views/home/widgets/circleVideoAnimation.dart';
-import 'package:biscuit1/views/home/widgets/videoPlayerItem.dart';
+import 'package:VMedia/views/home/widgets/buttons.dart';
+import 'package:VMedia/views/home/widgets/circleVideoAnimation.dart';
+import 'package:VMedia/views/home/widgets/videoPlayerItem.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(biscuit1 LANGUAGES CXX)
+project(VMedia LANGUAGES CXX)
 
-set(BINARY_NAME "biscuit1")
+set(BINARY_NAME "VMedia")
 
 cmake_policy(SET CMP0063 NEW)
 

@@ -1,5 +1,5 @@
-import 'package:biscuit1/views/profile/profile_screen.dart';
-import 'package:biscuit1/views/profile/utils/profileComponents.dart';
+import 'package:VMedia/views/profile/profile_screen.dart';
+import 'package:VMedia/views/profile/utils/profileComponents.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:biscuit1/utilities/constants.dart';
+import 'package:VMedia/utilities/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../helpers/firebase_helper.dart';

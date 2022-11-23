@@ -1,4 +1,4 @@
-import 'package:biscuit1/views/home/widgets/commentListTile.dart';
+import 'package:VMedia/views/home/widgets/commentListTile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -32,9 +32,13 @@ class CommentScreen extends StatelessWidget {
 
     final username = userModel.name;
     final timestamp = DateTime.now().toIso8601String();
+    final videoDocSnapLike = await fire.collection('videos').doc(videoId).get();
+    final videoDataLike = videoDocSnapLike.data() as Map<String, dynamic>;
+
     final profilePhoto =
         (videoDocSnap.data() as Map<String, dynamic>)['profilePhoto'];
-    final commentId = auth.currentUser!.uid;
+    final commentId =
+        auth.currentUser!.uid + (videoDataLike['commentCount'].toString());
 
     final newComment = CommentModel(
       username: username ?? '',
@@ -50,8 +54,18 @@ class CommentScreen extends StatelessWidget {
         .collection('comments')
         .doc(commentId)
         .set(newComment.toMap());
+    final userId = auth.currentUser!.uid;
 
-    //
+    final DocumentSnapshot likedSnap = await fire
+        .collection('videos')
+        .doc(videoId)
+        .collection('like')
+        .doc(userId)
+        .get();
+
+    videoDataLike['commentCount'] = (videoDataLike['commentCount'] ?? 0) + 1;
+    fire.collection('videos').doc(videoId).set(videoDataLike);
+
     FirebaseHelper.updateDataToNotification(
       othUid: videoId,
       message: 'comment',

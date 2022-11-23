@@ -1,6 +1,6 @@
-import 'package:biscuit1/utilities/constants.dart';
-import 'package:biscuit1/views/home/widgets/my_Like_Btn.dart';
-import 'package:biscuit1/views/profile/profile_screen.dart';
+import 'package:VMedia/utilities/constants.dart';
+import 'package:VMedia/views/home/widgets/my_Like_Btn.dart';
+import 'package:VMedia/views/profile/profile_screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +19,7 @@ class Like {
       padding: const EdgeInsets.only(top: 0),
       child: LikeButton(
         isLiked: like,
-        size: 90,
+        size: 80,
         onTap: onLikeButtonTapped,
         circleColor: const CircleColor(start: Colors.red, end: Colors.red),
         bubblesColor: const BubblesColor(
@@ -57,8 +57,8 @@ class Like {
           .doc(userId)
           .delete();
       videoData['isLiked'] = false;
+      videoData['likes'] = videoData['likes'] + (videoData['isLiked'] ? 1 : -1);
       fire.collection('videos').doc(videoId).set(videoData);
-
       return false;
     } else {
       fire
@@ -68,6 +68,8 @@ class Like {
           .doc(userId)
           .set({'user': auth.currentUser!.uid});
       videoData['isLiked'] = true;
+      videoData['likes'] = 1;
+
       fire.collection('videos').doc(videoId).set(videoData);
 
       //

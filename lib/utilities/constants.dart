@@ -43,40 +43,40 @@ const kBigSizeBoldTextStyle = TextStyle(
 
 const kPNormalSizeTextStyle = TextStyle(
   fontSize: 20,
-  color: Color.fromARGB(255, 236, 129, 255),
+  color: Colors.purple,
 );
 
 const kPNormalSizeBoldTextStyle = TextStyle(
   fontSize: 20,
   fontWeight: FontWeight.bold,
-  color: Color.fromARGB(255, 236, 129, 255),
+  color: Colors.purple,
 );
 
 const kPSmallSizeTextStyle = TextStyle(
   fontSize: 15,
-  color: Color.fromARGB(255, 236, 129, 255),
+  color: Colors.purple,
 );
 
 const kPVerySmallSizeTextStyle = TextStyle(
   fontSize: 12,
-  color: Color.fromARGB(255, 236, 129, 255),
+  color: Colors.purple,
 );
 
 const kPSmallSizeBoldTextStyle = TextStyle(
   fontSize: 15,
   fontWeight: FontWeight.bold,
-  color: Color.fromARGB(255, 236, 129, 255),
+  color: Colors.purple,
 );
 
 const kPBigSizeTextStyle = TextStyle(
   fontSize: 25,
-  color: Color.fromARGB(255, 236, 129, 255),
+  color: Colors.purple,
 );
 
 const kPBigSizeBoldTextStyle = TextStyle(
   fontSize: 25,
   fontWeight: FontWeight.bold,
-  color: Color.fromARGB(255, 236, 129, 255),
+  color: Colors.purple,
 );
 
 //////////////////////////////  white  ///////////////////////////

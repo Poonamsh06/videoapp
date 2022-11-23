@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:biscuit1/controllers/Auth/email_controller.dart';
+import 'package:VMedia/controllers/Auth/email_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:get/get.dart';

@@ -1,8 +1,8 @@
 import 'dart:io';
 
-import 'package:biscuit1/models/userModel.dart';
-import 'package:biscuit1/views/notifications/notifiction_screen.dart';
-import 'package:biscuit1/views/search/search_screen.dart';
+import 'package:VMedia/models/userModel.dart';
+import 'package:VMedia/views/notifications/notifiction_screen.dart';
+import 'package:VMedia/views/search/search_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

@@ -1,5 +1,5 @@
-import 'package:biscuit1/utilities/constants.dart';
-import 'package:biscuit1/views/notifications/utils/notificationTile.dart';
+import 'package:VMedia/utilities/constants.dart';
+import 'package:VMedia/views/notifications/utils/notificationTile.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 

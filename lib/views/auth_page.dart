@@ -61,7 +61,7 @@ class Signin extends StatelessWidget {
                     margin: const EdgeInsets.only(top: 50),
                     child: const Center(
                       child: Text(
-                        "Biscuit",
+                        "V-Media",
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 40,

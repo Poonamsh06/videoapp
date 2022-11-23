@@ -1,6 +1,6 @@
 {
-    "name": "biscuit1",
-    "short_name": "biscuit1",
+    "name": "VMedia",
+    "short_name": "VMedia",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
